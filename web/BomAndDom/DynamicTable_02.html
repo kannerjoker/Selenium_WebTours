@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动态表格2</title>
+    <style>
+        body{
+            text-align: center;
+            padding-top: 2%;
+        }
+        table{
+            margin-top: 2%;
+        }
+        td{
+            width: 100px;
+        }
+
+    </style>
+</head>
+<body>
+<span>
+        <input id="num" type="text" placeholder="请输入编号">
+        <input id="na" type="text" placeholder="请输入姓名">
+        <input id="gender" type="text" placeholder="请输入性别">
+        <input id="btn" type="button" value="添加">
+    </span>
+<table border="1" align="center">
+    <thead>
+    <caption>学生信息表</caption>
+    <tr>
+        <th>编号</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr id="t1">
+        <td>1</td>
+        <td>令狐冲</td>
+        <td>男</td>
+        <td><a id="a1" href="javascript:void(0)">删除</a></td>
+    </tr>
+    <tr id="t2">
+        <td>2</td>
+        <td>任我行</td>
+        <td>男</td>
+        <td><a id="a2" href="#javascript:void(0)">删除</a></td>
+    </tr>
+    <tr id="t3">
+        <td>3</td>
+        <td>岳不群</td>
+        <td>?</td>
+        <td><a id="a3" href="javascript:void(0)">删除</a></td>
+    </tr>
+    </tbody>
+    <tfoot></tfoot>
+</table>
+<script>
+    var tbodys = document.getElementsByTagName("tbody");
+    var tbody = tbodys[tbodys.length-1];
+    document.getElementById("btn").onclick = function(){
+        var num = 0;
+        var tTr = document.createElement("tr");
+        tbody.appendChild(tTr);
+        var tNum = document.getElementById("num").value;
+        var tNa = document.getElementById("na").value;
+        var tGender = document.getElementById("gender").value;
+        tTr.innerHTML += "<td>" + tNum + "</td>" +
+            "<td>" + tNa + "</td>" +
+            "<td>" + tGender + "</td>" +
+            "<td><a href=\"javascript:void(0)\" onclick=\"deleteTr(this);\"" + ">删除</a></td>";
+    }
+    function deleteTr(object){
+        var trNode = object.parentNode.parentNode;
+        //注意var arr = document.getElementsByTagName("tbody")集合中只有一个对象,但使用arr[0]和arr[arr.length-1]来添加和移除子元素时却有区别:
+        //前者是靠近<tbody>,后者是靠近</tbody>,中间没元素时,二者指向相同,但中间有元素时二者指向不同
+        tbody = document.getElementsByTagName("tbody")[document.getElementsByTagName("tbody").length-1];
+        tbody.removeChild(trNode);
+    }
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>优化注册页面</title>
+    <style type="text/css">
+        *{
+            padding: 0px;
+            margin: 0px;
+        }
+        body{
+            width: 100%;
+            background: url("./img/register_bg.png") no-repeat;
+            background-size: 100% 1000px;
+            background-position: center;
+        }
+        div{
+            margin-top: 20px;
+            /*border: solid red;*/
+        }
+        #div0{
+            margin-left: 18%;
+            background: white;
+            width: 75em;
+            height: 700px;
+            border: solid 5px whitesmoke;
+        }
+        #div1{
+            float: left;
+            width: 15em;
+            margin-left: 15px;
+        }
+        #div2{
+            float: left;
+            margin-left: 5%;
+            width: 40em;
+        }
+        #div3{
+            float: right;
+            width: 10em;
+        }
+        table{
+            width: 100%;
+        }
+        #gen{
+            color: black;
+        }
+        td>input{
+            padding: 10px;
+            width: 270px;
+        }
+        span{
+            float: left;
+            text-align: left;
+            color: red;
+        }
+        .t1{
+            width: 80px;
+            text-align: right;
+            padding: 5px;
+        }
+        #checkbox{
+            width: 120px;
+        }
+        img{
+            vertical-align: middle;
+        }
+        #submit{
+            margin-top: 5px;
+            width: 140px;
+            margin-left: 118px;
+            background: orange;
+        }
+        input{
+            border: solid gray 1px;
+            border-radius: 8px;
+        }
+        #div1 p:nth-child(1){
+            color: darkorange;
+            font-size: 30px;
+        }
+        #div1 p:last-child{
+            color: gray;
+            font-size: 27px;
+        }
+        #div3{
+            font-size: 20px;
+        }
+        #div3 a{
+            color: pink;
+        }
+
+    </style>
+</head>
+<body>
+<div id="div0">
+    <div id="div1">
+        <p>新用户注册</p>
+        <p>USER REGISTER</p>
+    </div>
+    <div id="div2">
+        <form action="#" method="get">
+            <table border="0" align="center" cellspacing="27px">
+                <!-- 用户名 -->
+                <tr>
+                    <td class="t1">用户名</td>
+                    <td>
+                        <input name="user" type="text" placeholder="请输入账号">
+                    </td>
+                    <td>
+                        <span id='s1' ></span>
+                    </td>
+                </tr>
+                <!-- 密码 -->
+                <tr>
+                    <td  class="t1">密码</td>
+                    <td>
+                        <input name="password" type="text" placeholder="请输入密码">
+                    </td>
+                    <td>
+                        <span id='s2' ></span>
+                    </td>
+                </tr>
+                <!-- Email -->
+                <tr>
+                    <td  class="t1">Email</td>
+                    <td>
+                        <input name="email" type="email" placeholder="请输入Email">
+                    </td>
+                    <td>
+                        <span id='s3' ></span>
+                    </td>
+                </tr>
+                <!-- 姓名 -->
+                <tr>
+                    <td  class="t1">姓名</td>
+                    <td>
+                        <input name="trueName" type="text" placeholder="请输入真实姓名">
+                    </td>
+                    <td>
+                        <span id='s4' ></span>
+                    </td>
+                </tr>
+                <!-- 手机号 -->
+                <tr>
+                    <td  class="t1">手机号</td>
+                    <td>
+                        <input name="tel" type="text" placeholder="请输入您的手机号">
+                    </td>
+                    <td>
+                        <span id='s5' ></span>
+                    </td>
+                </tr>
+                <!-- 性别 -->
+                <tr>
+                    <td class="t1">性别</td>
+                    <td>
+                        <span id="gen">
+                            <input id="gender1" type="radio" name="gender" value="male"> 男&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input id="gender2" type="radio" name="gender" value="female"> 女
+                        </span>
+                    </td>
+                    <td>
+                        <span id='s6' ></span>
+                    </td>
+                </tr>
+                <!-- 出生日期 -->
+                <tr>
+                    <td  class="t1">出生日期</td>
+                    <td>
+                        <input name="birthday" type="date">
+                    </td>
+                    <td>
+                        <span id='s7' ></span>
+                    </td>
+                </tr>
+                <!-- 验证码 -->
+                <tr>
+                    <td class="t1">验证码</td>
+                    <td>
+                        <input name="checkbox" id="checkbox" type="text" placeholder="请输入验证码">
+                        <img src="./img/verify_code.jpg" alt="verify">
+                    </td>
+                    <td>
+                        <span id='s8' ></span>
+                    </td>
+                </tr>
+                <!-- 注册 -->
+                <tr>
+                    <td colspan="2">
+                        <input id="submit" type="submit" value="注册">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div id="div3">已有账号?
+        <a href="javascript:void(0)">立即注册</a>
+    </div>
+</div>
+<script>
+    var matcher;
+    var arrInputs = document.getElementsByTagName("input");
+    var confirm = new Array(arrInputs.length);
+    var erroMsgs = ["用户名格式有误!","密码格式有误!","请检查邮箱格式!","姓名格式有误!","手机号输入有误!","性别男?","性别女?","请选择出生日期!","请检查验证码","提交!"];
+    var rules = [/^[a-zA-Z0-9·]{3,10}$/,/^[0-9a-zA-Z_]{6,16}$/,/^(www\.)?\w+@\w+\.?(com|cn)$/,/^[\u4e00-\u9fa5]{2,10}$/,/^[1]\d{10}$/,/[true|false]/,/[true|false]/,/^\d{4}-\d{2}-\d{2}$/,/^\d{4}$/,/.*/];
+    // alert(arrInputs.length);
+    // console.log(erroMsgs.indexOf(erroMsgs[3]));
+    for(var i=0;i<arrInputs.length-1;i++){
+        arrInputs[i].setAttribute("onblur","getBlur(arrInputs["+i+"],erroMsgs["+i+"],rules["+i+"]);");
+        arrInputs[i].setAttribute("onfocus","getFocus(arrInputs["+i+"]);");
+    }
+    function getBlur(arrInput,erroMsg,rule){
+        console.log(arrInput);
+        console.log(erroMsg);
+        console.log(rule);
+        var num = -1;
+        for(var i=0;i<arrInputs.length;i++){
+            if(arrInputs[i] == arrInput){
+                num = i;
+            }
+        }
+
+
+        // 因为性别的2行未进行有效校验(2个input对应1个span),导致从日期这一行的提示信息产生错位
+        // 故从第7行开始修正错位
+
+        if(rule.test(arrInput.value) == false){
+            if(num >= 7){
+                num--;
+            }
+            document.getElementById("s"+(num+1)).innerHTML = erroMsg;
+        }
+
+
+
+
+    }
+    function getFocus(arrInput){
+        var num;
+        for(var i=0;i<arrInputs.length;i++){
+            if(arrInputs[i] == arrInput){
+                num = i;
+            }
+        }
+        if(num >= 7){
+            num--;
+        }
+        document.getElementById("s"+(num+1)).innerText = "";
+
+    }
+    /*arrInputs[6].onmouseover = function(){
+        console.log(this.checked);
+    }*/
+    /*arrInputs[0].onblur = function(){
+        matcher = /^[a-zA-Z·]{3,10}$/;
+        confirm[0] = matcher.test(this.value);
+        if(confirm[0] == false){
+            document.getElementById("s1").innerHTML = "用户名输入有误!"
+        }
+    }
+
+    arrInputs[0].onfocus = function(){
+        document.getElementById("s1").innerHTML = "";
+    }
+    arrInputs[1].onblur = function(){
+        matcher = /^[0-9a-zA-Z_]{6,16}$/;
+        confirm[1] = matcher.test(this.value)
+        if(confirm[1] == false){
+            document.getElementById("s2").innerHTML = "密码输入有误";
+        }
+    }
+    arrInputs[1].onfocus = function(){
+        document.getElementById("s2").innerHTML = "";
+    }
+    arrInputs[2].onblur = function(){
+        matcher =/^(www\.)?\w+@\w+\.?(com|cn)$/;
+        confirm[2] = matcher.test(this.value);
+        if(confirm[2] == false){
+            document.getElementById("s3").innerHTML = "邮箱输入有误";
+        }
+    }
+    arrInputs[2].onfocus = function(){
+        document.getElementById("s3").innerHTML = "";
+    }*/
+</script>
+
+</body>
+</html>

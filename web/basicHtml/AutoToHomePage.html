@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自动跳转到首页</title>
+    <style>
+        #text{
+            color:red;
+        }
+        body p{
+            color:black;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <p>
+        剩余
+        
+        <span id="text"></span>         <!-- span 为行内标签,不换行-->
+        s,将自动跳转到首页!
+    </p>
+
+    <script>
+        window.setInterval("fun();",1000);
+        var time = 6;
+        var fun = function(){
+            time--;
+            document.getElementById("text").innerText = time;
+            if(time==0){
+                window.location.href = "https://www.baidu.com";
+            }
+        }
+    </script>
+</body>
+</html>

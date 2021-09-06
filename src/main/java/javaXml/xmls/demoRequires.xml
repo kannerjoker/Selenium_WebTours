@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<requires
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.demoRequired.com/requires"
+    xsi:schemaLocation="http://www.demoRequired.com/requires demoRequires.xsd"
+>
+    <require requires-id="2" type="included">
+        <values>
+            <value isRequired="true">Lorem</value>
+            <value isRequired="false">Lorem</value>
+            <value isRequired="false">Lorem</value>
+        </values>
+    </require>
+    <require requires-id="5" type="excluded">
+        <values>
+            <value isRequired="true">Lorem</value>
+            <value isRequired="false">Lorem</value>
+        </values>
+    </require>
+</requires>

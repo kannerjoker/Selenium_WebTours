@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<c3p0-config
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.demoC3p0.cn/c3p0-config"
+    xsi:schemaLocation="http://www.demoC3p0.cn/c3p0-config demoC3p0.xsd"
+>
+    <default-config name="default-config">
+        <property name="classDriver">com.mysql.cj.jdbc.driver</property>
+        <property name="jdbcUrl">jdbc:mysql://10.130.212.160</property>
+        <property name="user">root</property>
+        <property name="password">root</property>
+        <property name="initialPoolSize">5</property>
+        <property name="maxPoolSize">15</property>
+        <property name="checkoutTimeout">2000</property>
+    </default-config>
+    <named-config name="newConfig">
+        <property name="classDriver">com.mysql.cj.jdbc.driver</property>
+        <property name="jdbcUrl">jdbc:mysql://10.130.212.131</property>
+        <property name="user">kan</property>
+        <property name="password">123456</property>
+        <property name="initialPoolSize">8</property>
+        <property name="maxPoolSize">18</property>
+        <property name="checkoutTimeout">3000</property>
+    </named-config>
+</c3p0-config>

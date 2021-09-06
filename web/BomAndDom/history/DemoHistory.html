@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>history对象练习</title>
+    <style>
+        body{
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <span>
+        <input id="historyNums" type="button" value="获取历史记录个数">
+        <a href="./cyclePictures.html">08页面</a>
+        <input id="historyForward" type="button" value="前进">
+    </span>
+    <script>
+        var historyNums = document.getElementById("historyNums");
+        var historyForward = document.getElementById("historyForward");
+        historyNums.onclick = function(){
+            console.log("historyLength: " + window.history.length);
+        }
+        historyForward.onclick = function(){
+            //前进
+            // window.history.forward();
+            window.history.go(1);
+        }
+    </script>
+</body>
+</html>

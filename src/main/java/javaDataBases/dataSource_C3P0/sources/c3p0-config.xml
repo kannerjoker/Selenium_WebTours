@@ -1,0 +1,20 @@
+<c3p0-config>
+    <default-config>
+        <property name="classDriver">com.mysql.cj.jdbc.driver</property>
+        <property name="jdbcUrl">jdbc:mysql://10.130.212.160</property>
+        <property name="user">root</property>
+        <property name="password">root</property>
+        <property name="initialPoolSize">5</property>
+        <property name="maxPoolSize">15</property>
+        <properyt name="checkoutTimeout">2000</properyt>
+    </default-config>
+    <named-config name="newConfig">
+        <property name="classDriver">com.mysql.cj.jdbc.driver</property>
+        <property name="jdbcUrl">jdbc:mysql://10.130.212.160</property>
+        <property name="user">root</property>
+        <property name="password">root</property>
+        <property name="initialPoolSize">5</property>
+        <property name="maxPoolSize">8</property>
+        <properyt name="checkoutTimeout">5000</properyt>
+    </named-config>
+</c3p0-config>

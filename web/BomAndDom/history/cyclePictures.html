@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播图</title>
+    <style>
+        img{
+            width:100%;
+        }
+    </style>
+</head>
+    <img src="../img/banner_1.jpg">
+    <input type="button" value="back">
+<body>
+    <script>
+        window.setInterval(changeImg,2000);
+        var picId = 0;
+        function changeImg(){
+            if(picId > 2){
+                picId = 0;
+            }
+            document.getElementsByTagName("img")[0].src = "../img/banner_" + (++picId) +".jpg"
+        }
+        document.getElementsByTagName("input")[0].onclick = function(){
+            //后退
+            // window.history.back();
+            window.history.go(-1);
+        }
+    </script>
+</body>
+</html>

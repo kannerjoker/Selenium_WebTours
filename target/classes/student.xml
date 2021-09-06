@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--<!DOCTYPE students SYSTEM "D:\IdeaProjects\Selenium_WebTours\src\main\java\javaXml\xmls\student.dtd">-->
+
+<students
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns="http://www.demo.cn/student"
+		xsi:schemaLocation="http://www.demo.cn/student ./student.xsd"
+>
+	<student number="itcast_0001">
+		<name>tom</name>
+		<age>11</age>
+		<sex>male</sex>
+	</student>
+	
+</students>

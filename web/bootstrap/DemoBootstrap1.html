@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>layout</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="bootstrap-3.4.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet/less" href="bootstrap-3.4.1-dist/less/mixin.less">
+    <style type="text/css">
+        body>div{
+            padding-left: 20px;
+        }
+        label{
+            margin-left: 10px;
+        }
+        hr{
+            width: 50%;
+            border: red 1px solid;
+            margin-left: 2%;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="tag-title" class="row">
+        <div class="col-md-6">
+            <!--
+                h1~h6: 标题
+                标签设置为small时,表示副标题
+                class设置为small时,可以使字体变小
+            -->
+            <h1>bootstrap title<small>h1</small></h1>
+            <h2>bootstrap title<small>h2</small></h2>
+            <span >bootstrap title normal</span><br/>
+            <span class="small">bootstrap title with class "small"</span><br/>
+        </div>
+    </div>
+    <hr align="left"/>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-6">
+                <!--
+                    段落中设置class属性lead可以让字体突出显示(加粗变大)
+                -->
+                <p>normal tag 'p'</p>
+                <p class="lead">
+                    tag 'p' with class "lead";
+                </p>
+            </div>
+        </div>
+    </div>
+    <hr align="left" style="margin-left:2%"/>
+    <div class="row">
+        <div class="col-md-6">
+            <!-- 字体突出显示(底色加粗)_tag mark -->
+            <span>this font is a highlight <mark> by tag mark</mark> </span><br/>
+            <!-- 删除线_tag del或s -->
+            <span>delete line <del> by tag del</del>></span><br/>
+            <span>delete line <s> by tag s</s></span><br>
+            <!-- 下划线_tag u或ins -->
+            <span>underline<u>by tag u</u></span><br>
+            <span>underline<ins>by tag ins</ins></span><br/>
+            <!-- 突出显示_tag strong -->
+            <span>extrude<strong>by tag strong</strong></span><br/>
+            <!-- 字体倾斜_tag em -->
+            <span>inclined<em>by tag em</em></span>
+        </div>
+    </div>
+    <hr align="left" style="margin-left:2%"/>
+    <div class="row">
+        <div class="col-md-6">
+            <!-- 文本对齐 -->
+            <p class="text-left">text align left</p>
+            <p class="text-right">text align right</p>
+            <p class="text-center">text align center</p>
+            <!-- 不换行 -->
+            <p class="text-nowrap">
+                Lorem ipsum dolor sit amet Integer molestie lorem at massa Facilisis in pretium nisl aliquet
+                Lorem ipsum dolor sit amet Integer molestie lorem at massa Facilisis in pretium nisl aliquet</p>
+            <!-- 行文字自适应对齐,类似两端对齐-->
+            <p class="text-justify">In my younger and more vulnerable years my father gave me some advice that I've been turning over in my mind ever since.
+                'Whenever you feel like criticizing anyone,' he told me, 'just remember that all the people in this world haven't had the advantages that you've had.'</p>
+        </div>
+    </div>
+    <hr align="left" style="margin-left:2%"/>
+    <div class="row">
+        <div class="col-md-6">
+            <!--小写 -->
+            <p class="text-lowercase">text to lower case</p>
+            <!-- 大写 -->
+            <p class="text-uppercase">text to upper case</p>
+            <!-- 首字母大写 -->
+            <p class="text-capitalize">text to capitalize</p>
+        </div>
+    </div>
+    <hr align="left">
+    <div class="row">
+        <div class="col-md-6">
+            <!-- abbr为提示标签,鼠标悬浮有问号效果;一般配合title属性使用,鼠标悬浮显示全称或扩展信息 -->
+            <abbr title="abcdef">a</abbr>
+            <br/>
+            <!-- 为abbr标签设置class为initialism时,可以让标签字体变小 -->
+            <abbr title="HTML的全称为超文本标记语言，是一种标记语言。" class="initialism">HTML</abbr> is a language.
+        </div>
+    </div>
+    <hr align="left">
+    <div class="row">
+        <div class="col-md-5">
+            <!-- address标签一般用来定义地址信息 -->
+            <address>
+                <em>
+                    <p>
+                        <strong>Twitter,Inc.</strong><br>
+                        1355 Market Street, Suite 900<br>
+                        San Francisco, CA 94103<br>
+                        <abbr title="Phone">P</abbr> : (123) 456-7890
+                    </p>
+                </em>
+            </address>
+        </div>
+    </div>
+    <hr align="left">
+    <div class="row">
+        <div class="col-md-6">
+            <!-- blockquote标签用来定义引用信息,一般和p标签一起使用 -->
+            <blockquote>
+                <p>This is a famous story!</p>
+            </blockquote>
+            <!-- footer标签用来定义来源,和cite连用 -->
+            <footer><cite title="from a famous writer Tolstoy "><a href="javascript:void(0)">source title</a></cite> </footer>
+            <br>
+            <blockquote class="blockquote-reverse">
+                <p>This is a famous song named QiLiZhiWai</p>
+                <footer>By<cite><abbr title="Zhou Jie Lun">ZJL</abbr></cite></footer>
+            </blockquote>
+        </div>
+    </div>
+    <hr align="left">
+    <!-- ul/ol 列表标签组 -->
+    <div class="row">
+        <div class="col-md-6">
+            <ol class="list-unstyled">
+                <li>Lorem ipsum dolor sit amet</li>
+                <li>Consectetur adipiscing elit</li>
+                <li>Integer molestie lorem at massa</li>
+                <li>Facilisis in pretium nisl aliquet</li>
+            </ol>
+            <ol style="list-style: lower-alpha">
+                <li>Nulla volutpat aliquam velit</li>
+                <li>Phasellus iaculis neque</li>
+                <li>Purus sodales ultricies</li>
+                <li>Vestibulum laoreet porttitor sem</li>
+            </ol>
+            <ol style="list-style-type: lower-greek">
+                <li>Ac tristique libero volutpat at</li>
+                <li>Faucibus porta lacus fringilla vel</li>
+                <li>Aenean sit amet erat nunc</li>
+                <li>Eget porttitor lorem</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-4">
+            <ul style="list-style-type: initial">
+                <li>Lorem ipsum dolor sit amet</li>
+                <li>Consectetur adipiscing elit</li>
+                <li>Integer molestie lorem at massa</li>
+                <li>Facilisis in pretium nisl aliquet</li>
+            </ul>
+            <ul style="list-style-type: square">
+                <li>Nulla volutpat aliquam velit</li>
+                <li>Phasellus iaculis neque</li>
+                <li>Purus sodales ultricies</li>
+                <li>Vestibulum laoreet porttitor sem</li>
+            </ul>
+            <ul class="list-unstyled">
+                <li>Ac tristique libero volutpat at</li>
+                <li>Faucibus porta lacus fringilla vel</li>
+                <li>Aenean sit amet erat nunc</li>
+                <li>Eget porttitor lorem</li>
+            </ul>
+        </div>
+    </div>
+    <hr align="left">
+    <div class="row">
+        <div class="col-md-6">
+            <ol class="list-inline">
+                <li>Lorem ipsum dolor sit amet</li>
+                <li>Consectetur adipiscing elit</li>
+                <li>Integer molestie lorem at massa</li>
+                <li>Facilisis in pretium nisl aliquet</li>
+            </ol>
+
+            <ul id="demo">
+                <!-- 行标签中设置display样式为inline可以让去掉该行的标签样式 -->
+                <li>Lorem ipsum dolor sit amet</li>
+                <li style="display:inline">Consectetur adipiscing elit</li>
+                <li>Integer molestie lorem at massa</li>
+                <li style="display:inline">Facilisis in pretium nisl aliquet</li>
+
+                <!--<style>
+                    #demo>li{
+                        display: inline;
+                    }
+                </style>-->
+            </ul>
+        </div>
+    </div>
+    <hr align="left">
+    <!-- dl 描述标签组 -->
+    <div class="row">
+        <div class="col-md-6">
+            <dl>
+                描述
+                <dt>文本1</dt>
+                <dd>文本2</dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6">
+            <dl class="dl-horizontal">
+                <!--
+                    text-overflow: clip;     超过范围就将字符截断
+                    text-overflow: ellipsis; 超过范围用"..."代替
+                    text-overflow: str;      超过范围用str代替
+                -->
+                <dt style="text-overflow:ellipsis;overflow:hidden">新闻1-喀布尔待命的阿富汗雇员现在怎么办？”8月的一天，曾为一家西方机构工作的艾哈迈德在脸书群组上询问着，尝试获得</dt>
+                <dd>两个月来，艾哈迈德一直在打听，如何才能获得一张外国签证。
+                    “那些还在喀布尔待命的（外国机构）阿富汗雇员现在怎么办？”8月的一天，曾为一家西方机构工作的艾哈迈德在脸书群组上询问着，尝试获得其他成功移民者的经验。
+                </dd>
+                <dt>新闻2</dt>
+                <dd>但一切来得太匆忙，他没有等来任何回复，仅仅在几天之内，塔利班几乎不费一兵一卒就占领了喀布尔的总统府，阿富汗总统加尼悄然外逃，至今不知去向。
+                    “我们根本没机会去外国，我很焦虑。”艾哈迈德8月16日告诉澎湃新闻（www.thepaper.cn），他担心未来塔利班会对他们这些曾为外国机构工作过的阿富汗人采取惩罚措施。
+                    8月15日，在占领第一个省会城市仅10天后，塔利班包围了首都喀布尔。随后，总统外逃、政局过渡，一切快得超乎人们的想象。
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <hr align="left">
+    <!-- code 橘红色字灰底,一般用来标记代码关键字 -->
+    <div class="row">
+        <div class="col-xs-6">
+            For example,
+            <code>
+                <br/>
+                public void main(String[] args){<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;System.out.print("hello world");<br/>
+                }<br/>
+            </code> is an early code.
+        </div>
+    </div>
+    <hr align="left">
+    <!-- kbd 黑底,一般用来标记/提示键盘按键 -->
+    <div class="row">
+        <div class="col-xs-6">
+            <kbd>ctl + a</kbd> 可以截屏
+        </div>
+    </div>
+    <!-- pre 浅灰底色,一般用来标记代码块
+        单行代码可以缩进排版,
+        多行代码,注意不要缩进,否则缩进也会算成内容(空格)
+    -->
+    <hr align="left">
+    <div class="row">
+        <div class="col-xs-6">
+            for python:
+            <pre>print("hello world");</pre>
+for java:
+<pre>
+public void main(String args){
+    System.out.print("hello world!");
+}
+</pre>
+        </div>
+    </div>
+
+
+    <hr align="left">
+    <!--设置表单样式-->
+    <!--
+        form-inline:    同行显示
+        form-horizontal 水平显示
+        form-group:     表单组,一般和form-control联合使用,可以修改表单样式
+    -->
+    <div class="row form-inline form-horizontal">
+        <div class="col-xs-4 form-group ">
+            <label for="sel_1">未设置属性</label>
+            <select id="sel_1" class="form-control">
+                <option class="">-- 请输入 --</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+            </select>
+        </div>
+        <div class="col-xs-4 form-group">
+            <label for="sel_2">设置属性为readonly</label>
+            <select id="sel_2" class="form-control" readonly>
+                <option class="">-- 请输入 --</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+            </select>
+        </div>
+        <div class="col-xs-4 form-group">
+            <label for="sel_3">设置属性为disabled</label>
+            <select id="sel_3" class="form-control" disabled>
+                <option class="">-- 请输入 --</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+            </select>
+        </div>
+    </div>
+    <hr align="left">
+    <div class="row">
+        <div class="col-xs-6 table-responsive">
+            <table class="table table-hover table-bordered table-condensed text-center text-info">
+                <thead>
+                    <caption style="text-align:center;font-size: 22px" class="text-primary">学生信息表</caption>
+                </thead>
+                <tbody>
+                    <tr class="text-danger">
+                        <style>
+                            th{
+                                text-align: center;
+                            }
+                        </style>
+                        <th>编号</th>
+                        <th>姓名</th>
+                        <th>年级</th>
+                        <th>班级</th>
+                        <th>学号</th>
+                    </tr>
+                    <tr class="active">
+                        <td>1</td>
+                        <td>张三</td>
+                        <td>大一</td>
+                        <td>3</td>
+                        <td>2021-08-18-120001</td>
+                    </tr>
+                    <tr class="info">
+                        <td>2</td>
+                        <td>李四</td>
+                        <td>大二</td>
+                        <td>1</td>
+                        <td>2021-08-18-220051</td>
+                    </tr>
+                    <tr class="warning">
+                        <td>3</td>
+                        <td>王五</td>
+                        <td>大三</td>
+                        <td>4</td>
+                        <td>2021-08-18-320854</td>
+                    </tr>
+                    <tr class="danger">
+                        <td>4</td>
+                        <td>赵六</td>
+                        <td>大四</td>
+                        <td>2</td>
+                        <td>2021-08-18-420504</td>
+                    </tr>
+                </tbody>
+                <tfoot></tfoot>
+            </table>
+        </div>
+    </div>
+    <hr align="left">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-6">
+                <form method="get" action="javascript:void(0)">
+                    <div class="row form-group">
+                        <div class="col-xs-6 form-inline">
+                            <label for="input_1">TextBox</label>
+                            <input type="text" id="input_1" name="text" class="form-control">
+                        </div>
+                        <div class="col-xs-6 form-inline">
+                            <label for="input_2">Email</label>
+                            <input type="email" id="input_2" name="email" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-6 form-inline">
+                            <label for="input_3">Date</label>
+                            <input type="date" id="input_3" name="date" class="form-control" style="vertical-align:middle">
+                        </div>
+                        <div class="col-xs-6 form-inline">
+                            <label for="input_4">Date</label>
+                            <input type="date" id="input_4" name="date" class="form-control" style="vertical-align:middle">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <hr/>
+    <div class="">
+        <div class="row">
+            <div class="col-xs-12">
+                <form method="get" action="#">
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <label class="sr-only" for="tx">t</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">$</div>
+                                <input type="text" id="tx" class="form-control">
+                                <div class="input-group-addon">123456.00</div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="bootstrap-3.4.1-dist/jQuery/jquery-3.2.1.min.js"></script>
+    <script src="bootstrap-3.4.1-dist/js/bootstrap.min.js"></script>
+    <script src="bootstrap-3.4.1-dist/js/less.min.js"></script>
+    <script>
+        var fun = function(){
+            window.eval("console.log('abc!');");
+        }
+        fun();
+    </script>
+</body>
+</html>

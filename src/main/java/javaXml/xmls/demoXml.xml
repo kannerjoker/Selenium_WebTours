@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE users SYSTEM "D:\IdeaProjects\Selenium_WebTours\src\main\java\javaXml\xmls\demoXml.dtd">
+<users>
+	<user id="u1">
+		<name>xiaoming!</name>
+		<age>12</age>
+		<gender>male</gender>
+	</user>
+	<user id="u2">
+		<name>xiaohua</name>
+		<age>11</age>
+		<gender>female</gender>
+	</user>
+</users>

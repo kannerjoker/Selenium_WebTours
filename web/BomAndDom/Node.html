@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Node对象</title>
+    <style>
+        div{
+            border: solid red 2px;
+        }
+        #d1{
+            width: 300px;
+            height: 300px;
+        }
+        #d2{
+            widht: 200px;
+            height: 200px;
+        }
+        #d3{
+            width: 100px;
+            heigth: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="d1">
+        <div id="d2">div2</div>
+        div1
+    </div>
+    <input id="in_1" type="button" value="addNode">
+    <input id="in_2" type="button" value="deleteNode">
+<script>
+    var d2 = document.getElementsByTagName("div")[1];
+    //获取到某一元素后,相当于获取到该元素的节点,通过parentNod可以获取其上一层节点
+    d1 = d2.parentNode;
+    document.getElementById("in_1").onclick = function(){
+        var d3 = document.createElement("div");
+        //添加盒子
+        d1.appendChild(d3);
+        d3.id = "d3";
+        d3.innerText = "div3";
+    }
+    document.getElementById("in_2").onclick = function(){
+        // 移除盒子
+        d1.removeChild(d2);
+    }
+
+
+</script>
+</body>
+</html>

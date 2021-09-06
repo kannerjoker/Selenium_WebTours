@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="license">
+  <database-model serializer="dbm" rdbms="POSTGRES" format-version="4.7">
+    <root id="1"/>
+    <database id="2" parent="1" name="authorizatio_management">
+      <ObjectId>265</ObjectId>
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </database>
+    <database id="3" parent="1" name="system">
+      <ObjectId>1</ObjectId>
+    </database>
+    <database id="4" parent="1" name="defaultdb">
+      <ObjectId>50</ObjectId>
+    </database>
+    <database id="5" parent="1" name="postgres">
+      <ObjectId>51</ObjectId>
+    </database>
+    <database id="6" parent="1" name="traffic_accident">
+      <ObjectId>52</ObjectId>
+    </database>
+    <database id="7" parent="1" name="smart_bus">
+      <ObjectId>173</ObjectId>
+    </database>
+    <database id="8" parent="1" name="open_api">
+      <ObjectId>206</ObjectId>
+    </database>
+    <database id="9" parent="1" name="istar">
+      <ObjectId>280</ObjectId>
+    </database>
+    <role id="10" parent="1" name="admin">
+      <ObjectId>2310524507</ObjectId>
+      <SuperRole>1</SuperRole>
+      <Inherit>1</Inherit>
+      <CreateRole>1</CreateRole>
+      <CreateDb>1</CreateDb>
+      <CanLogin>1</CanLogin>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="11" parent="1" name="caeri">
+      <ObjectId>494711976</ObjectId>
+      <CanLogin>1</CanLogin>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="12" parent="1" name="root">
+      <ObjectId>1546506610</ObjectId>
+      <SuperRole>1</SuperRole>
+      <CreateRole>1</CreateRole>
+      <CreateDb>1</CreateDb>
+      <CanLogin>1</CanLogin>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <schema id="13" parent="2" name="public">
+      <ObjectId>3476152963</ObjectId>
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="14" parent="2" name="pg_catalog">
+      <ObjectId>441251423</ObjectId>
+    </schema>
+    <schema id="15" parent="2" name="information_schema">
+      <ObjectId>852660020</ObjectId>
+    </schema>
+    <schema id="16" parent="2" name="crdb_internal">
+      <ObjectId>2821188923</ObjectId>
+    </schema>
+    <schema id="17" parent="2" name="pg_extension">
+      <ObjectId>3424810997</ObjectId>
+    </schema>
+  </database-model>
+</dataSource>

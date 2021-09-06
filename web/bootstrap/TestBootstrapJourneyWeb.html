@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="bootstrap-3.4.1-dist/css/bootstrap.min.css">
+    <!--<link rel="stylesheet/less" href="bootstrap-3.4.1-dist/">-->
+    <title>旅游网站</title>
+    <style>
+        @media screen and (min-width:1295px){
+            #cls>ul>li>a::after{
+                content: "";
+                margin-left: 50px;
+            }
+        }
+        @media screen and (min-width:1590px){
+            #cls>ul>li>a::after{
+                content: "";
+                margin-left: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!--导航条-->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#cls">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="DemoBootStrapJourneyWeb.html">Brand</a>
+            </div>
+            <div id="cls" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a data-toggle="dropdown">门票<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a>&yen;199</a></li>
+                            <li><a>&yen;299</a></li>
+                            <li><a>&yen;399</a></li>
+                        </ul>
+                    </li>
+                    <li><a>酒店</a></li>
+                    <li><a>香港车票</a></li>
+                    <li><a>出境地</a></li>
+                    <li><a>国内游</a></li>
+                    <li><a>港澳游</a></li>
+                    <li><a>抱团定制</a></li>
+                    <li class="dropdown">
+                        <a data-toggle="dropdown">全球自由行<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a>$599</a></li>
+                            <li><a>$699</a></li>
+                            <li><a>$799</a></li>
+                        </ul>
+                    </li>
+                    <li><a>收藏排行榜</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--轮播图-->
+    <div class="carousel slide" id="crs" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#crs" data-slide-to="0" class="active"></li>
+            <li data-target="#crs" data-slide-to="1"></li>
+            <li data-target="#crs" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="item active">
+                <img src="../case_journeyWeb/img/banner_1.jpg" alt="">
+                <div class="caption"></div>
+            </div>
+            <div class="item">
+                <img src="../case_journeyWeb/img/banner_2.jpg" alt="">
+                <div class="caption"></div>
+            </div>
+            <div class="item">
+                <img src="../case_journeyWeb/img/banner_3.jpg" alt="">
+                <div class="caption"></div>
+            </div>
+        </div>
+        <a class="left carousel-control" href="#crs" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#crs" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div>
+
+    <script src="bootstrap-3.4.1-dist/jQuery/jquery-3.2.1.min.js"></script>
+    <script src="bootstrap-3.4.1-dist/js/bootstrap.min.js"></script>
+    <script src="bootstrap-3.4.1-dist/js/less.min.js"></script>
+</body>
+</html>

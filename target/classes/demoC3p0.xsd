@@ -1,0 +1,60 @@
+<?xml version="1.0" ?>
+<xsd:schema xmlns="http://www.demoC3p0.cn/c3p0-config" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.demoC3p0.cn/c3p0-config"
+            elementFormDefault="qualified">
+    <xsd:element name="c3p0-config" type="c3p0-configsType"/>
+        <!-- 1 c3p0-config -->
+        <xsd:complexType name="c3p0-configsType">
+            <xsd:sequence>
+                <xsd:element name="default-config" type="default-configType"/>
+                <xsd:element name="named-config" type="named-configsType" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+        <!-- 2-1 default-config -->
+        <xsd:complexType name="default-configType">
+            <xsd:sequence>
+                <xsd:element name="property" type="propertyType1" minOccurs="1" maxOccurs="7"/>
+            </xsd:sequence>
+            <xsd:attribute name="name" type="default_PropertyType"/>
+        </xsd:complexType>
+        <!-- 2-1-E1 property -->
+        <xsd:complexType name="propertyType1">
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:string">
+                    <xsd:attribute name="name" type="nameType_1"></xsd:attribute>
+                </xsd:extension>
+            </xsd:simpleContent>
+        </xsd:complexType>
+        <!-- 2-1-A1  default_PropertyType-->
+        <xsd:simpleType name="default_PropertyType">
+            <xsd:restriction base="xsd:string"/>
+        </xsd:simpleType>
+        <!-- 2-1-E1-A1 -->
+        <xsd:simpleType name="nameType_1">
+            <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="classDriver"></xsd:enumeration>
+                <xsd:enumeration value="jdbcUrl"></xsd:enumeration>
+                <xsd:enumeration value="user"></xsd:enumeration>
+                <xsd:enumeration value="password"></xsd:enumeration>
+                <xsd:enumeration value="initialPoolSize"></xsd:enumeration>
+                <xsd:enumeration value="maxPoolSize"></xsd:enumeration>
+                <xsd:enumeration value="checkoutTimeout"></xsd:enumeration>
+            </xsd:restriction>
+        </xsd:simpleType>
+
+        <!-- 2-2 named-config -->
+        <xsd:complexType name="named-configsType">
+            <xsd:sequence>
+                <!-- 由于 default-config 与 named-config 的 property 定义方式相同,故将两个的type指定成一样-->
+                <xsd:element name="property" type="propertyType1" minOccurs="1" maxOccurs="7"/>
+            </xsd:sequence>
+            <xsd:attribute name="name" type="nameType_2"/>
+        </xsd:complexType>
+        <!-- 2-2-A1 指定 named-config 的 name 属性 -->
+        <xsd:simpleType name="nameType_2">
+            <xsd:restriction base="xsd:string">
+                <xsd:pattern value="new.*"></xsd:pattern>
+            </xsd:restriction>
+        </xsd:simpleType>
+
+</xsd:schema>

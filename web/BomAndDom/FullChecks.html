@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表格全选</title>
+    <style>
+        table{
+            margin-left: 30%;
+        }
+        th,td{
+            width: 80px;
+            border: solid 1px;
+            text-align: center;
+        }
+        p{
+            margin-top: 10px;
+            margin-left: 30%;
+        }
+        .onEle{
+            background-color: lightpink;
+        }
+        .outEle{
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <form action="#" method="get">
+        <table border="1">
+            <thead>
+            <caption>学生信息表</caption>
+            <tr>
+                <th><input id="ch0" type="checkbox" name="check0">全选</th>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><input id="ch1" type="checkbox" name="check1"></td>
+                <td>1</td>
+                <td>令狐冲</td>
+                <td>男</td>
+                <td><a href="javascript:void(0)">删除</a></td>
+            </tr>
+            <tr>
+                <td><input id="ch2" type="checkbox" name="check2"></td>
+                <td>2</td>
+                <td>任我行</td>
+                <td>男</td>
+                <td><a href="javascript:void(0)">删除</a></td>
+            </tr>
+            <tr>
+                <td><input id="ch3" type="checkbox" name="check3"></td>
+                <td>3</td>
+                <td>岳不群</td>
+                <td>?</td>
+                <td><a href="javascript:void(0)">删除</a></td>
+            </tr>
+            </tbody>
+            <tfoot></tfoot>
+        </table>
+        <!--<input type="submit" value="提交">-->
+    </form>
+
+    <p>
+        <input type="button" id="btn1" value="全选">
+        <input type="button" id="btn2" value="清空">
+        <input type="button" id="btn3" value="反选">
+    </p>
+
+    <script>
+        //未选中的checkbox个数
+        var cnt = 0;
+        var rows = document.getElementsByTagName("tr");
+        var arr = new Array(rows.length);
+        for(var i=0;i<rows.length;i++){
+            arr[i] = document.getElementById("ch"+i);
+        }
+        //全选
+        document.getElementById("btn1").onclick = function(){
+            for(var i=0;i<arr.length;i++){
+                arr[i].checked = true;
+            }
+        }
+        //清空
+        document.getElementById("btn2").onclick = function(){
+            for(var i=0;i<arr.length;i++){
+                arr[i].checked = false;
+            }
+        }
+        //反选
+        document.getElementById("btn3").onclick =function(){
+            var num = 0;
+            for(var i=1;i<arr.length;i++){
+                if(arr[i].checked==false){
+                    arr[i].checked =true;
+                    num++;
+                }else{
+                    arr[i].checked =false;
+                }
+            }
+           check();
+        }
+
+        arr[0].onclick = function(obj){
+            for(var i=1;i<arr.length;i++){
+                arr[i].checked = this.checked;
+            }
+        }
+
+        //检查全选框状态,有一个子选框未选,则全选框设置为未选,若所有子选框都选了,则全选框选中
+        function check(){
+            cnt=0;
+            for(var i=1;i<arr.length;i++){
+                //有一个子选框未选,则全选框设置为未选
+                if(arr[i].checked == false){
+                    arr[0].checked = false;
+                    cnt++;
+                    return;
+                }
+            }
+            //遍历结束,发现没有未选中的(即全部都选中了)
+            if(cnt==0){
+                arr[0].checked = true;
+            }
+        }
+        //窗体内一有变化就去校验
+        // document.getElementsByTagName("body")[0].onchange = check;
+        //点击checkbox时才去校验
+        for(var i=1;i<arr.length;i++){
+            arr[i].onclick = function(){
+                check();
+            }
+        }
+        //为鼠标悬浮添加背景颜色
+        var eleTrs = document.getElementsByTagName("tr");
+        for(var i=0;i<eleTrs.length;i++){
+            eleTrs[i].onmouseover = function(){
+                this.setAttribute("class","onEle");
+            }
+            //绑定事件时,注意使用this传参,来代替对象本身(直接传递对象时会匹配不上)
+            eleTrs[i].setAttribute("onmouseout","setOut(this);");
+            // setObject(eleTrs[i]);
+        }
+        function setOut(obj){
+            obj.setAttribute("class","outEle");
+        }
+        // function setObject(obj){
+        //     obj.setAttribute("id","def");
+        // }
+
+    </script>
+</body>
+</html>

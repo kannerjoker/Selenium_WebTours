@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>常见事件</title>
+    <style>
+        div{
+            color: gray;
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+    <!--单击-->
+    <div id="d1">div1_onclick</div>
+    <!--双击-->
+    <div id="d2">div2_ondblclick</div>
+    <!--获得焦点,一般用于表单校验-->
+    <div id="d3"><input type="text">div3_onfocus</div>
+    <!--失去焦点-->
+    <div id="d4"><input type="text">div4_onblur</div>
+    <!--图片或页面加载完成-->
+    <div id="d5"><img src="./img/verify_code.jpg">div5_onload</div>
+    <!--鼠标按下-->
+    <div id="d6">div6_onmousedown</div>
+    <!--鼠标松开-->
+    <div id="d7">div7_onmouseup</div>
+    <!--鼠标悬浮-->
+    <div id="d8">div8_onmouseover</div>
+    <!--鼠标移开-->
+    <div id="d9">div9_onmouseout</div>
+    <!--键按下-->
+    <div id="d10"><input type="text">div10_onkeydown</div>
+    <!--键松开-->
+    <div id="d11"><input type="text">div11_onkeyup</div>
+    <!--键按下后再松开-->
+    <div id="d12"><input type="text">div12_onkeypress</div>
+    <!--域内容发生变化-->
+    <div id="d13"><input type="text">div13_onchange</div>
+    <!--文本被选中-->
+    <div id="d14"><input type="text" value="test onselect">
+        div14_onselect
+    </div>
+    <!--表单提交,当方法返回false时,可阻止提交-->
+    <div id="d15">
+        <form id="form" action="#" method="get">
+            <select id="sel" name="sel">
+                <option>--请选择--</option>
+                <option>北京</option>
+                <option>上海</option>
+                <option>重庆</option>
+            </select>
+            <input id="sub" type="submit" value="submit">
+        </form>
+        div15_onsubmit
+    </div>
+    <!--当重置按钮被点击-->
+    <div id="d16">div16_onreset</div>
+<script>
+    var length = document.getElementsByTagName("div").length;
+    var list = new Array(length);
+    for(var i=1;i<=length;i++){
+        list[i-1] = document.getElementById("d"+i);
+        console.log(list[i-1]);
+    }
+
+    list[0].onclick = function(){
+        list[0].innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;\t单击<br>"
+    };
+    list[1].ondblclick = function(){
+        list[1].innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;\双击<br>"
+    }
+    document.getElementsByTagName("input")[0].onfocus = function(){
+        list[2].innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp\t获得焦点<br>"
+    }
+    document.getElementsByTagName("input")[1].onblur = function(){
+        list[3].innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp\t失去焦点<br>"
+    }
+    document.getElementsByTagName("img")[0].onload = function(){
+        list[4].innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp\t图片加载完成<br>"
+    }
+    list[5].onmousedown = function(){
+        list[5].innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp\t鼠标按下<br>"
+    }
+    list[6].onmouseup = function(){
+        list[6].innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp\t鼠标松开<br>"
+    }
+    list[7].onmouseover = function(){
+        list[7].innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp\t鼠标悬停<br>"
+        list[7].onmouseover = null;
+    }
+    list[8].onmouseout = function(){
+        list[8].innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp\t鼠标移开<br>"
+        //清空方法,让事件只触发一次
+        list[8].onmouseout = null;
+    }
+    document.getElementsByTagName("input")[2].onkeydown = function(event){
+        if(event.keyCode=="13"){
+            list[9].innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp\t键盘按下回车<br>"
+        }
+    }
+    document.getElementsByTagName("input")[3].onkeyup = function(act){
+        if(act.keyCode==13){
+            list[10].innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp\t键盘松开回车<br>"
+        }
+    }
+    document.getElementsByTagName("input")[4].onkeypress = function(act){
+        if(act.keyCode==13){
+            list[11].innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp\t键盘按下回车后再松开<br>"
+        }
+    }
+    document.getElementsByTagName("input")[5].onchange = function(){
+        list[12].innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp\t内容域发生改变<br>"
+    }
+
+    list[13].onselect = function(opt){
+        list[13].innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp\t选择了文字<br>";
+
+
+    }
+    //注意,表单提交时的对象是表单,而不是submit按钮
+    document.getElementById("form").onsubmit = function(){
+        //定位下拉框
+        var sel = document.getElementById("sel");
+        //显示选中的选项
+        // alert(sel.options[sel.selectedIndex].value);
+
+
+        if(sel.options[sel.selectedIndex].value=="重庆"){
+            list[14].innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp\t选择了重庆,提交成功<br>";
+            return true;
+        }
+        return false;
+    };
+</script>
+</body>
+</html>

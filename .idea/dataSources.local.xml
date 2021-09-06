@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="dataStatistics.sqlite" uuid="e8eb7e9b-4d14-4406-9366-755f341390b5">
+      <database-info product="SQLite" version="3.31.1" jdbc-version="2.1" driver-name="SQLite JDBC" driver-version="3.31.1">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
+      <secret-storage>master_key</secret-storage>
+      <auth-required>false</auth-required>
+      <introspection-schemas>*:main</introspection-schemas>
+    </data-source>
+    <data-source name="Practice.sqlite" uuid="42831ea3-4404-4f91-992a-67a23eed71c0">
+      <database-info product="SQLite" version="3.31.1" jdbc-version="2.1" driver-name="SQLite JDBC" driver-version="3.31.1">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
+      <secret-storage>master_key</secret-storage>
+      <auth-required>false</auth-required>
+      <introspection-schemas>*:main</introspection-schemas>
+    </data-source>
+    <data-source name="@10.130.212.160_local" uuid="a1f2b01d-b7b1-4b58-8ac9-8fd021bb521c">
+      <database-info product="MySQL" version="5.6.51" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.47 ( Revision: fe1903b1ecb4a96a917f7ed3190d80c049b1de29 )">
+        <extra-name-characters>#@</extra-name-characters>
+        <identifier-quote-string>`</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <introspection-schemas>*:information_schema</introspection-schemas>
+    </data-source>
+    <data-source name="@10.130.212.61_remote" uuid="ee8b5d5d-de8b-4d2b-bcf0-edeed2afec63">
+      <database-info product="MySQL" version="5.6.51" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.47 ( Revision: fe1903b1ecb4a96a917f7ed3190d80c049b1de29 )">
+        <extra-name-characters>#@</extra-name-characters>
+        <identifier-quote-string>`</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <introspection-schemas>*:information_schema</introspection-schemas>
+    </data-source>
+    <data-source name="license" uuid="843f2824-2a7c-427a-8ce2-3238a4de3911">
+      <database-info product="PostgreSQL" version="9.5.0" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.2.5">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>caeri</user-name>
+      <introspection-schemas>authorizatio_management:@,crdb_internal,information_schema,pg_catalog,pg_extension,public|system:</introspection-schemas>
+    </data-source>
+  </component>
+</project>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width;initial-scale=1">
+    <title>"ul"和"ol"标签</title>
+    <!--<link rel="stylesheet" href="css/bootstrap.min.css">-->
+    <link rel="stylesheet/less" href="Tag_ul_ol.less">
+    <style>
+        #type-ul{
+            /*无排序样式*/
+            /*list-style-type: none;*/
+        }
+        #type-ol_1{
+            /*罗马数字排序*/
+            list-style-type: lower-roman;
+        }
+        #type-ol_2{
+            /*α β γ δ排序*/
+            list-style-type: lower-greek;
+        }
+        #type-ol_3{
+            /*大写英文字母排序*/
+            list-style: upper-alpha;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-md-4 ">
+            <ul id="type-ul"  class="list-unstyled">
+                <li>Lorem ipsum dolor sit amet</li>
+                <li>Consectetur adipiscing elit</li>
+                <li>Integer molestie lorem at massa</li>
+                <li>Facilisis in pretium nisl aliquet</li>
+                <li>Nulla volutpat aliquam velit</li>
+                <li>Phasellus iaculis neque</li>
+                <li>Purus sodales ultricies</li>
+                <li>Vestibulum laoreet porttitor sem</li>
+                <li>Ac tristique libero volutpat at</li>
+                <li>Faucibus porta lacus fringilla vel</li>
+                <li>Aenean sit amet erat nunc</li>
+                <li>Eget porttitor lorem</li>
+            </ul>
+
+        </div>
+
+    </div>
+    <div class="row">
+        <ol id="type-ol_1">
+            <li>Lorem ipsum dolor sit amet</li>
+            <li>Consectetur adipiscing elit</li>
+            <li>Integer molestie lorem at massa</li>
+            <li>Facilisis in pretium nisl aliquet</li>
+        </ol>
+        <ol id="type-ol_2">
+            <li>Nulla volutpat aliquam velit</li>
+            <li>Phasellus iaculis neque</li>
+            <li>Purus sodales ultricies</li>
+            <li>Vestibulum laoreet porttitor sem</li>
+        </ol>
+        <ol id="type-ol_3">
+            <li>Ac tristique libero volutpat at</li>
+            <li>Faucibus porta lacus fringilla vel</li>
+            <li>Aenean sit amet erat nunc</li>
+            <li>Eget porttitor lorem</li>
+        </ol>
+    </div>
+
+
+
+
+    <script src="jQuery/jquery-3.2.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/less.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>some normal tags</title>
+    </head>
+    <body>
+        <!--&lt;!&ndash; a &ndash;&gt;
+        <table border="1" name="Tag_a" width="70%">
+            <tr>
+                <th>属性</th>
+                <th>值</th>
+                <th>描述</th>
+            </tr>
+            <tr>
+                <td><center>charset</center></td>
+                <td>char_encoding</td>
+                <td>H5中不支持。规定被链接的字符集</td>
+            </tr>
+            <tr>
+                <td><center>coords</center></td>
+                <td>coordinate</td>
+                <td>H5中不支持。规定链接坐标</td>
+            </tr>
+            <tr>
+                <td><center>&nbsp;download&nbsp;</center></td>
+                <td>filename</td>
+                <td>规定被下载的链接坐标</td>
+            </tr>
+            <tr>
+                <td><center>href</center></td>
+                <td>URL</td>
+                <td>规定链接指向的页面URL</td>
+            </tr>
+            <tr>
+                <td><center>hreflang</center></td>
+                <td>language_code&nbsp;&nbsp;</td>
+                <td>规定被链接文档的语言</td>
+            </tr>
+            <tr>
+                <td><center>media</center></td>
+                <td>media_query</td>
+                <td>规定被链接文档是何种媒介/设备优化</td>
+            </tr>
+            <tr>
+                <td><center>name</center></td>
+                <td>section_name</td>
+                <td>H5中不支持。规定锚的名称</td>
+            </tr>
+            <tr>
+                <td><center>rel</center></td>
+                <td>text</td>
+                <td>规定当前文档与被链接文档之间的关系</td>
+            </tr>
+            <tr>
+                <td><center>rev</center></td>
+                <td>text</td>
+                <td>H5中不支持。规定被链接文档与当前文档之间的关系&nbsp;&nbsp;</td>
+            </tr>
+            <tr>
+                <td><center>shape</center></td>
+                <td>
+                    defult<br/>
+                    rect<br/>
+                    circle<br/>
+                    poly
+                </td>
+                <td>H5中不支持。规定链接的形状</td>
+            </tr>
+            <tr>
+                <td><center>target</center></td>
+                <td>
+                    _blank<br/>
+                    _parent<br/>
+                    _self<br/>
+                    _top<br/>
+                    framename
+                </td>
+                <td>规定在何处打开连接文档</td>
+            </tr>
+            <tr>
+                <td><center>type</center></td>
+                <td>MIME type</td>
+                <td>规定被链接文档的MIME类型</td>
+            </tr>
+        </table>-->
+        <font color="#ff00ff" face="隶书" size="5px">
+            <a onclick="createA(this)">link</a><br/>
+            <input type="button" value="back" onclick="historyBack()"></input>
+        </font>
+        <script>
+            function historyBack(){
+                window.history.back();
+            }
+             /*
+                动态生成标签:
+                    var a = document.getElementsByTagName().item();
+                    var b = document.createElement();
+                    b.setAttribute("","");
+                    a.appendChild(b);
+
+            */
+            function createA(para){
+                var a = ["charset","coords","download","href","hreflang","media","name","rel","rev","shape","target","type"];
+                var b = ["char_encoding coordinate","filename","URL","language_code  ","media_query","section_name","text","text","defult \r\n rect \r\n circle \r\n poly","_blank_parent \r\n _self \r\n _top","framename","MIME type"];
+                var c = ["H5中不支持。规定被链接的字符集","H5中不支持。规定链接坐标","规定被下载的链接坐标","规定链接指向的页面URL","规定被链接文档的语言","规定被链接文档是何种媒介/设备优化",
+                    "H5中不支持。规定锚的名称","规定当前文档与被链接文档之间的关系","H5中不支持。规定被链接文档与当前文档之间的关系  ","H5中不支持。规定链接的形状","规定在何处打开连接文档","规定被链接文档的MIME类型"];
+                var d = ["属性","值","描述"];
+                var tagBody = document.getElementsByTagName("body").item(0);
+                var tagTable = document.createElement("table");
+                tagTable.setAttribute("border","1");
+                tagTable.setAttribute("name","Tag_a_1");
+                tagBody.appendChild(tagTable);
+                //添加表头
+                var tagHead = tagTable.appendChild(document.createElement("tr"));
+                tagTable.appendChild(tagHead);
+                for(var k in d){
+                    var attribute = document.createElement("th");
+                    attribute.innerText = d[k];
+                    tagHead.appendChild(attribute);
+                }
+
+                //添加表格内容
+                /*
+                    <tr>
+                        <td><center>name</center></td>
+                        <td>section_name</td>
+                        <td>H5中不支持。规定锚的名称</td>
+                    </tr>
+                    <tr>
+                        <td><center>rel</center></td>
+                        <td>text</td>
+                        <td>规定当前文档与被链接文档之间的关系</td>
+                    </tr>
+                */
+                for(var k in a){
+                    var tableTr = tagTable.appendChild(document.createElement("tr"));
+                    var tableTd1 = document.createElement("td");
+                    var tableTd1_Center = document.createElement("center");
+                    var tableTd2 = document.createElement("td");
+                    var tableTd3 = document.createElement("td");
+                    //注意是center标签的文本
+                    tableTd1_Center.innerText = a[k];
+                    tableTd2.innerText = b[k];
+                    tableTd3.innerText = c[k];
+                    /*
+                        添加顺序:
+                        tr → td → center
+                           → td
+                           → td
+                    */
+                    tagTable.appendChild(tableTr);
+
+                    tableTr.appendChild(tableTd1)
+                    tableTd1.appendChild(tableTd1_Center);
+
+                    tableTr.appendChild(tableTd2);
+                    tableTr.appendChild(tableTd3);
+
+                }
+                //只能点击一次        html设置createA(this)
+                para.onclick = null;
+            }
+        </script>
+    </body>
+</html>

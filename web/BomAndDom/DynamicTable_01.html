@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动态表格</title>
+    <style>
+        body{
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        table{
+            margin-top: 2%;
+            margin-left: 40%;
+        }
+        th{
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <span>
+        <input id="num" type="text" placeholder="请输入编号">
+        <input id="na" type="text" placeholder="请输入姓名">
+        <input id="gender" type="text" placeholder="请输入性别">
+        <input id="btn" type="button" value="添加">
+    </span>
+    <table border="1">
+        <thead>
+            <caption>学生信息表</caption>
+            <tr>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr id="t1">
+                <td>1</td>
+                <td>令狐冲</td>
+                <td>男</td>
+                <td><a id="a1" href="#abc1">删除</a></td>
+            </tr>
+            <tr id="t2">
+                <td>2</td>
+                <td>任我行</td>
+                <td>男</td>
+                <td><a id="a2" href="#abc2">删除</a></td>
+            </tr>
+            <tr id="t3">
+                <td>3</td>
+                <td>岳不群</td>
+                <td>?</td>
+                <td><a id="a3" href="#abc3">删除</a></td>
+            </tr>
+        </tbody>
+        <tfoot></tfoot>
+    </table>
+    <script>
+        var num = document.getElementById("num");
+        var na = document.getElementById("na");
+        var gender = document.getElementById("gender");
+        var btn = document.getElementById("btn");
+        //表格已有3行,新添加的行从最后一行开始添加
+        var tbodys = document.getElementsByTagName("tbody");
+        var tbody = tbodys[tbodys.length-1];
+        //表格已有3行,新添加的行从第一行开始添加
+        /*var tbody = document.getElementsByTagName("tbody")[0];*/
+        /*var tbody = document.getElementById("t3").parentNode;*/
+        var theTrs;
+        btn.onclick = function(){
+            theTrs = document.getElementsByTagName("tr");
+            console.log("trNums:" + theTrs.length);
+            var tr = document.createElement("tr");
+            var tdNum = document.createElement("td");
+            var tdName = document.createElement("td");
+            var tdGender = document.createElement("td");
+            var tdOperation = document.createElement("td");
+            var tdA = document.createElement("a");
+            tbody.appendChild(tr);
+            tr.appendChild(tdNum);
+            tr.appendChild(tdName);
+            tr.appendChild(tdGender);
+            tr.appendChild(tdOperation);
+            tdOperation.appendChild(tdA);
+            var trId = "td" + (theTrs.length-1);
+            tr.setAttribute("id",trId);
+            tdA.setAttribute("href","#new"+(theTrs.length-1));
+
+            tdNum.innerHTML = num.value;
+            tdName.innerHTML = na.value;
+            tdGender.innerHTML = gender.value;
+            tdA.innerHTML = "删除";
+            tdA.onclick = function(){
+                var node = this.parentNode;
+                tbody.removeChild(node.parentNode);
+                // tbody.removeChild(document.getElementById(trId));
+            };
+        }
+        //为默认的3行设置删除功能
+        for(var i=1;i<=3;i++){
+            document.getElementById("a"+i).onclick = function(){
+            var node = this.parentNode;
+            tbody.removeChild(node.parentNode);
+            }
+        }
+
+
+    </script>
+
+</body>
+</html>

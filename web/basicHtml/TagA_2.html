@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <a href="index.html">index</a><br/>
+    <a href="#">#</a><br/>
+    <a href="#1">id1</a><br/>
+    <a href="#2">id2</a><br/>
+    <a href="img/sources/02案例介绍.mp4">movies</a>
+    <!-- 图片 -->
+    <center>
+        <img src="img/footer.jpg" alt="首页">
+    </center>
+    <!-- 视频 -->
+    <!-- 添加视频和视频控件,但需要添加js来支持拖动 -->
+    <!-- 浏览器出于安全考虑,不支持访问根目录以外的路径,故file:///+绝对路径不可访问,报不允许访问本地资源错误 -->
+    <video src="img/sources/02案例介绍.mp4" width="640px" height="360px" controls="controls"></video>
+    <br>
+    <!-- 音频 -->
+    <span>
+        <audio src="img/sources/单词的秘密21.mp3" controls=""></audio>
+    </span><br/>
+    <!-- source允许存放多个数据源,让浏览器根据自身编码进行选择 -->
+    <!-- MIME类型                    扩展名
+    video/x-ms-asf                   asf
+    video/mpeg mpeg                  mpg
+    video/x-msvideo                  avi
+    application/vnd.rn-realmedia     rm
+    audio/x-pn-realaudio             ram  ra
+    audio/x-aiff                     aif   aiff   aifc
+    audio/mpeg                       mpga   mp3
+    audio/midi                       mid   midi
+    audio/wav                        wav
+    audio/x-ms-wma                   wma
+    video/x-ms-wmv                   wmv -->
+    <video height="360px" width="640px" controls="">
+        <source src="img/sources/2021-03-10-18-02-02_Cam3.avi" type="video/x-msvideo">
+        <!--<source src="img/sources/02案例介绍.mp4" type="video/mp4">-->
+    </video><br/>
+    <video src="img/sources/2021-03-10-18-02-02_Cam3.avi" width="640px" heigtht="360px"></video>
+
+    <h1 id="1">hello world</h1>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <h2 id="2">hello world</h2>
+
+</body>
+</html>

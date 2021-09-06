@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns="http://www.demoRequired.com/requires"
+            targetNamespace="http://www.demoRequired.com/requires"
+            elementFormDefault="qualified">
+    <xsd:element name="requires" type="requiresType"/>
+        <!-- requires -->
+        <xsd:complexType name="requiresType">
+            <xsd:sequence>
+                <xsd:element name="require" type="requireType" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+        <!-- require -->
+        <xsd:complexType name="requireType">
+            <xsd:sequence>
+                <xsd:element name="values" type="valuesType"/>
+            </xsd:sequence>
+            <xsd:attribute name="requires-id" type="require_id"/>
+            <xsd:attribute name="type" type="require_type"/>
+        </xsd:complexType>
+        <!-- values -->
+        <xsd:complexType name="valuesType">
+            <xsd:sequence>
+                <xsd:element name="value" type="valueType" minOccurs="1" maxOccurs="unbounded"></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+        <!-- value -->
+        <!-- 通过complexType → simpleContent → extension → attribute 为叶子节点添加属性 -->
+        <xsd:complexType name="valueType">
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:string">
+                    <xsd:attribute name="isRequired" type="value_isRequired"></xsd:attribute>
+                </xsd:extension>
+            </xsd:simpleContent>
+        </xsd:complexType>
+
+        <!--simpleType-->
+            <!-- require_id -->
+            <xsd:simpleType name="require_id">
+                <xsd:restriction base="xsd:integer"></xsd:restriction>
+            </xsd:simpleType>
+            <!-- require_type -->
+            <xsd:simpleType name="require_type">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="included"/>
+                    <xsd:enumeration value="excluded"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+            <!-- value_isRequired -->
+            <xsd:simpleType name="value_isRequired">
+                <xsd:restriction base="xsd:boolean"/>
+            </xsd:simpleType>
+
+</xsd:schema>

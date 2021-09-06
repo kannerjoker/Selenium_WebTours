@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Browser Object Model</title>
+    <style>
+        div{
+            width:200px;
+            height:300px;
+        }
+    </style>
+</head>
+<body>
+    <div>div</div>
+<script>
+
+    //浏览器5大对象:   window navigator location history screen
+    /*一、window*/
+    //1.获取浏览器窗体（不包括滚动条和工具栏）宽度和高度 innerWidth innerHeight
+    document.write("浏览器主体高" + window.innerHeight);
+    document.write("浏览器主体宽" + window.innerWidth);
+    /*获取标签盒子的宽度和高度 clientWidth clientHeight */
+    var clientHeight = document.getElementsByTagName("div")[0].clientHeight;
+    var clientWidth = document.getElementsByTagName("div")[0].clientWidth;
+    document.write("<br>" + "clientWidth: " + clientWidth);
+    document.write("<br>" + "clientHeight: " + clientHeight);
+    location.href = "https://www.baidu.com";
+    console.log(window.Math.random());
+    console.log(window.location.hostname);
+    console.log(window.location.pathname);
+    //2.window对象的3种弹窗形式:    alert、confirm、prompt
+        // window.alert("hello window");
+        // var confirm = window.confirm("Is it a window?");
+        // var prompt = window.prompt("The input for this window");
+    //3.浏览器窗口
+        //open
+       /* var blank = window.open();                              //打开空白标签
+        var baidu = window.open("https://www.baidu.com");       //打开目标url
+        /!*
+            ① open方法返回窗体对象
+            ② open空参调用时打开空白页面
+        *!/
+        //close
+        close();                                                //不指定窗体,默认关闭当前窗体
+        setTimeout("baidu.close();",1500);                      //使用指定窗体调用close(),则关闭指定窗体*/
+
+    /*
+    if条件中:
+        当条件为数字时,0为假,非0为真
+        当条件为字符串时,null为假,非空为真
+        当条件为对象时,对象存在为真,不存在为假
+    */
+    // if(confirm){
+    //     window.document.write("confirm" + confirm + "<br>");
+    // }
+    // if(prompt){
+    //     window.document.write("prompt" + prompt + "<br>");
+    // }
+
+
+
+
+</script>
+</body>
+</html>

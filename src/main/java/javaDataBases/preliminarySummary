@@ -1,0 +1,466 @@
+SQL基本语法:
+I 基本原理:
+    一、约束:
+        主键(primary key)、外键(foreign key)、键(key)、非空（not null）、唯一（unique）、检查（check）[mysql不支持检查约束]
+        a、primary key:
+            ①创建_1
+                create table demoTable(column1 varchar(10) primary key,        --将primary key定义放在指定列属性定义语句中
+                                       column2 int(4));
+              创建_2
+                create table demoTable(column1 varchar(10),
+                                       column2 int(4),
+                                       primary key(column1));                  --将primary key定义放在最后,用primary key(指定列)定义主键
+            ②修改_创建
+                alter table demoTable add primary key(column1);
+              修改_删除
+                alter table demoTable drop primary key;
+            ③主键常用操作_自增(auto_increment)
+                create table demoTable(column1 int(3) primary key auto_increment,
+                                       column2 varchar(10));
+              --当设置了自增主键时,插入行时可以跳过该行或主键插入null,主键会自动按自增序列进行填充
+                跳过:      insert into demoTable(column2) values('abc');
+                插入null:  insert into demoTable(column1,column2) values(NULL,'abc');
+              --设置自增起始值
+                添加: create table demoTable(column1 int(3) auto_increment,column2 varchar(10),primary key(column1))auto_increment=10;    --设置自增起始值10
+                修改: alter table demoTable auto_increment=1000;
+              --自增只能设置在属性为"key"的列;
+              --自增的起始值与偏移量(重启mysql后,初始值和偏移量会恢复为默认值1)
+                设置第一次加载初始值:set auto_increment_offset = 值;
+                    使用delete删除表格时,删除后自增从删除前的最大值开始;
+                    使用truncate删除表格时,删除后自增从默认值开始;
+                设置自增偏移值:      set auto_increment_increment = 值;
+                    当主-主同步时,2个主机对象,偏移量设置为2,m1:1,3,5...  m2:2,4,6...
+                                  3个主机对象,偏移量设置为3,m1:1,4,7...  m2:2,5,8...   m3:3,6,9
+        b、foreign key
+            格式: [constraint] [外键名称] foreign key(从表列) references 主表名(主表列) [on update cascade] [on delete cascade];
+                  constraint、外键名称、on update cascade、on delete cascade可省略
+            ①创建_1
+                create table demoTable_1(column1 int(3) primary key auto_increment,
+                                       column2 varchar(20),
+                                       column3 int,
+                                       [constraint] [foreignKeyName] foreign key(column3) references demoTable_2(id) [on update cascade] [on delete cascade]);  --创建外键约束,一般是从表创建
+            ②创建_2
+                alter table demoTable_1 add [constraint] [foreignKey_fk] foreign key(column3) references demoTable_2(id) [on update cascade] [on delete cascade];
+            ③删除
+                alter table demoTable_1 drop foreign key foreignKey_fk;        --foreignKey_fk 为外键名称
+            ④外键的级联操作:修改或删除主表主键,同时修改/删除从表外键
+                级联修改: on update cascade;
+                级联删除: on delete cascade;
+        c、not null
+            创建: create table demoTable(column1 int(10) not null,column2 varchar(20));
+            修改: alter table demoTable modify column1 int(5) not null;
+            删除: alter table demoTable modify column1 int(5);        --重新定义时没加not null,该列就没有非空约束
+        d、unique
+            创建: create table demoTable(column1 in(10) unique,column2 varchar(20));
+            修改: alter table demoTable modify column1 int(20) unique;
+            删除: alter table demoTable modify column1 int(20);       --重新定义时没加unique,该列就没有唯一约束
+
+    二、表与表之间的关系
+        一对多： 常见。如，职业与员工     --主外键关系
+        多对多： 学生与选课               --中间表，多对一的集合。
+        一对一： 少见，因为可以放到一张表里。如，公民与护照  --从表的外键也是主键；本质上是特殊的一对多，从表外键设置唯一
+    三、范式 -> 规范的数据库需要一些规则去优化数据的设计和存储,这些规则就是范式
+        数据库需满足的三大范式:
+            第一范式: 原子性,表中的每一列不可再分
+            第二范式: 不产生局部依赖,每一张表只阐述一件事情; 每一列都依赖于主键
+            第三范式: 不产生传递依赖,每一列都直接依赖于主键,而非通过其他列间接依赖于主键
+    四、事务 —> 事务执行是一个整体,所有sql语句都需要执行成功,则conmmit;一旦有有一条失败,整个事务就需要回滚,则rollback;
+        1) 流程: 开始事务 → 执行多条SQL语句
+                                  ↓
+                            成功      失败
+                             ↓        ↓
+                           commit   rollback
+            开启事务: start transaction;
+            提交事务: commit;
+            回滚:     rollback;
+        2) 事务的四大特性(ACID):
+            原子性: 每个事务都是一个整体,不可再细分;
+            一致性: 事务在执行前的数据库状态与执行后的数据库状态保持一致;
+            隔离性: 事务与事务之间不存在影响,执行时保持隔离状态;
+            持久性: 一旦事务执行成功,对数据库的修改就是持久的。就算关机，也会保存下来；
+        3) 事务的隔离等级 -> 隔离等级越高,安全性越高,但性能会越差;
+                级别      名字          隔离等级            脏读      不可重复读       幻读      数据库默认隔离级别
+                1       读取未提交    read uncommitted       是           是            是
+                2       读取已提交    read committed         否           是            是      Oracle和Sql Server
+                3       可重复读      repeatable read        否           否            是             Mysql
+                4       串行化        serializable           否           否            否
+           隔离等级不够可能会导致的问题：
+               ① 脏读： 一个事务读取到另一个事务尚未提交的数据；
+               ② 不可重复读： 一个事务中两次读取的数据内容不一致。要求一个事务中多次读取数据是一致的，这是事务update时引发的问题。
+               ③ 幻读： 一个事务中读取数据的数量不一致。 要求一个十五中读取的数据数量是一致的，这是insert或delete时引发的问题。
+           隔离等级的操作: -> 隔离等级设置后,需重新登录mysql才能看到隔离等级的变化
+                查看自动提交事务设置: select @@auto_commit;                                      --Mysql执行DML语句(增删改)时,会自动提交事务
+                设置自动提交事务:     set @@auto_commit = 值;                                    --值: 0 - 关闭,1 - 开启
+                查看全局事务隔离等级: select @@tx_isolation;
+                设置事务隔离等级:     set global transaction isolation level 级别字符串;         --级别字符串:read uncommitted/read committed/repeatable read/serializable
+        4) 设置事务回滚点
+                设置回滚点: savepoint 名字
+                回滚:       rollback to 名字
+
+II 对数据库的“增删改查”
+    一、操作数据库
+        1.创建数据库
+            create databaseEMP1 demoDatabase;
+            create databaseEMP1 if not exists demoDatabase;
+            create databaseEMP1 if not exists demoDatabase character set utf8;
+        2.查看数据库
+            show databases;
+            show create databaseEMP1 demoDatabase;  //  查看数据库编码
+        3.修改数据库
+            alter databaseEMP1 demoDatabase character set gbk;
+        4.删除数据库
+            drop databaseEMP1 demoDatabase;
+        5.使用数据库
+            use demoDatabase;       //切换数据库
+            select databaseEMP1();      //查看正在使用的数据库
+        6.数据库的备份与还原;
+            备份 -> linux mysql未登录情况下:  mysqldump -uroot -p 数据库名 > /home/kan/123.sql;
+            还原 -> 登录mysql -> 切换一个数据库(use mysqlDatabase):   source /home/kan/123.sql;
+    二、操作表格
+        A、DDL语句 ->针对表格结构
+            1.创建表格
+                create table(列名1 数据类型1(长度),         //可选参数: [key] [defalut 数据类型] [auto_increment] [on update current_timestamp]
+                             列名2 数据类型2(长度),
+                             ...
+                             列名n 数据类型n(长度))[engine=InnoDB default charset=utf8];
+                 create table 新表名 like 旧表名;         //只复制了表格结构
+                1.1数据类型
+                    a、常用数据类型
+                        1) int:整型
+                        2) double:浮点型
+                        3) varchar:字符串型
+                        4) date:日期类型,格式为yyyy-MM-dd,只有年月日
+                    b、详细数据类型
+                        1) 整数
+                            tinyint         --占8位二进制(1个字节)
+                            smallint        --占16位二进制
+                            mediumint       --占24位二进制
+                            int(integer)    --占32位二进制
+                        2) 小数
+                            float           --单精度浮点数,占4个字节
+                            double          --双进度浮点数,占8个字节
+                        3) 日期
+                            time            --表示时间类型
+                            date            --表示日期类型
+                            datetime        --表示日期和时间类型
+                        4) 字符串
+                            char(m)         --固定长度,m为0~255之间整数
+                            varchar(m)      --可变长度,m为0~65535之间整数
+                        5) 大二进制
+                            tinyblob/Big Large Object   --0~255 字节
+                            blob                        --0~65535 字节
+                            mediumblob                  --0~167772150 字节
+                            longblob                    --0~4294967295 字节
+                        6) 大文本
+                            tinytext                    --0~255 字节
+                            text                        --0~65535 字节
+                            mediumtext                  --0~167772150 字节
+                            longtext                    --0~4294967295 字节
+            2.查看表
+                show tables;                    --查看有哪些表格
+                show create table demoTable;    --查看表格创建语句
+                desc demoTable;                 --查看表格结构
+            3.删除表
+                drop table demoTable;           --删除表格
+                drop table if exists demoTable; --删除前先校验表格是否存在
+            4.修改表结构
+                alter table demoTable add column 列名 数据类型(长度);       --新增列,可选参数[key] [default 值] [Extra](如:auto_increment)
+                alter table demoTable modify 列名 新数据类型(新长度);       --修改列类型和最大长度
+                alter table demoTable change 旧列名 新列名 数据类型(长度);  --修改列名
+                alter table demoTable drop 列名;                            --删除列
+            5.修改表名
+                rename table 旧表名 to 新表名;                              --修改表格名称
+            6.指定表格编码规则
+                alter table demoTable character set gbk;
+        B、DML -> 针对表格内容
+            1.插入行
+                insert into demoTable values(值1,值2,值3...);              --对照表格所有列,依次插入
+                insert into demoTable(列1,列3,列5...) values(值1,值3,值5); --对照表格指定列,插入指定数据
+                insert into demoTable values(值1,值2,值3...),(值11,值12,值13...),(值21,值22,值23...);    --插入多列,有的驱动不支持
+            2.修改行
+                update demoTable set 列1=值1,列2=值2,列3=值3;              --不指定条件,则针对指定列的所有行进行修改
+                update demoTable set 列=值 where 列=条件值;                --指定条件,则只修改指定列的特定行
+            3.删除行
+                delete from demoTable;                                     --不带条件,删除所有行
+                delete from demoTable where 列1=值1;                       --根据条件,删除指定行
+                truncate [table] demoTable;                                --删除所有行,与delete区别:删除表并克隆一个空表
+        C、DQL -> 查询表格
+            基本结构:select 列[as 别名] from demoTable [where字句][group by 字句][having 字句][order by字句][limit 字句]
+            1.查询所有数据:
+                select * from demoTable;
+            2.查询指定列:
+                select 列1,列2 from demoTable;
+            3.查询指定行:
+                select * from demoTable where 条件;
+                    条件运算符:
+                        1) >、<、=、>=、<=、<>
+                        2) between 值1 and 值2；                           --[值1,值2)
+                        3) in(值1,值2,值3...)                              --判断值是否在某个范围内
+                        4) like '-张%'                                     --模糊查询,% 和 - 表示通配符, % 表示任意多个字符, - 表示任意一个字符
+                        5) is null                                         --判断值是否为空
+                     逻辑运算符:
+                        1) and 或 &&
+                        2) or  或 ||
+                        3) not 或 !
+
+                select * from demoTable limit offset,length;                              --查看结果的某几行:limit 开始行,行数
+            4.查询条件运算的列:
+                select 列1+列2 from demoTable;
+                select 列1+100 from demoTable;
+                聚合函数:
+                    select max(列1) from demoTable;                                     --最大值: max(列)
+                    select min(列2) from demoTable;                                     --最小值: min(列)
+                    select avg(列3) from demoTable;                                     --平均值: avg(列)
+                    select sum(列4) from demoTable;                                     --求和:   sum(列)
+                    select count(列5) from demoTable;                                   --计数:   count(列)
+
+            5.查询某列去重后的结果:
+                select distinct 列1 from demoTable;                                     --去重distinct
+            6.列重命名
+                select 列1 as 新列名1,列2 新列名2,列1+列2 as '列1+列2' from demoTable;  --重命名用as,可省略
+            7.排序
+                select * from demoTable order by 列;                                    --默认升序
+                select * from demoTable order by 列 asc;                                --asc 升序
+                select * from demoTable order by 列 desc:                               --desc 降序
+                select * from demoTable order by 列1 asc,列2 desc;                      --组合排序,列1的升序,列2的降序来排序
+            8.分组(一般和聚合函数一起用,找到每个组中的聚合值)
+                1) 基本语法
+                    select 列1,列2... from demoTable group by 列3 [having 条件];            --根据列3进行分组,列3中相同值对应的行合并为一行(一般为最上面那一行)
+                2) 结合聚合函数使用
+                    聚合函数:max(列)、min(列)、avg(列)、sum(列)、count(列)
+                            select max(列1),min(列2),avg(列3),sum(列4),count(列5) from demoTable group by 列7 having 条件;
+                    特殊:ifnull(列,n)            --使用count(列)时,发现列为null时,count不会计数,可以使用 ifnull(列,n) 将null转换为n,再count就能将所有列都纳入统计
+                            Fx: select count(ifnull(列2,0)) from demoTable group by 列3 having 列4='M';
+                3) 组合使用
+                    查询年龄大于 25 岁的人，按性别分组，统计每组的人数，并只显示性别人数大于 2 的数据
+                    select sex,count(*) from demoTable where age>25 group by sex having count(sex)>2;
+                4) 注意事项
+                    where 和 having区别:
+                        where:  用于一般列的筛选,条件中不允许有聚合函数
+                        having: 用于分组后列的筛选,查询的列必须是聚合函数或分组指定的列,条件中可以使用聚合函数
+
+            9.子查询 -> 一个查询的结果作为另一个查询的条件;有查询的嵌套,括号内部的查询称为子查询
+                分步查询_1:   select id from dept where name='研发部';
+                分步查询_2:   select * from emp where id = 1;
+                子查询_1:     select * from emp where id = (select id from dept where name='市场部');   --资格查询的结果作为另一个查询的条件
+                子查询_2:     select * from (select * from demoTable1 where num>100) as 新表名 where sex='M';
+
+                子查询结果:
+                    ①单列单行: 父查询用 >、<、=、<>等运算条件
+                        select column1 from emp1 where column2 > (select column2 from emp2);
+                    ②单列多行: 父查询用in、not in
+                        select name from dept where id in (select dept_id from emp where salary > 8000);
+                    ③多列多行: 子查询为多列,父查询以子查询作为数据源(from 后面跟 子查询),一般用于多表子查询
+                        子查询:     select id from (select * from emp) e;                               --子查询得到的表格需要重命名
+                        多表子查询: select * from (select * from emp where join_date > '1996-1-4') as e,(select * from dept where dept_id = 2)as d where e.id = d.dept_id;
+
+            10.多表查询 -> 通过主键外键约束,实现跨表查询,查询结果显示多张表
+                select * from emp1,emp2;                                         --笛卡尔积现象,左表每条数据与右表每条数据匹配
+                select * from emp1,emp2 where emp1.num = emp2.num;               --根据主键与外键创建关联,消除笛卡尔积现象(隐式内连接)
+                内连接只显示多表的公共部分;外连接优先显示公共(对齐)部分,侧重表格其余数据也会显示在末尾
+                    1) 内连接: "表1 [inner] join 表2 on 表1.列 = 表2.列;"
+                    2) 隐式内连接: "where 表1.列 = 表2.列"                            --隐式内连接,没有"..join .. on",用where
+                    2) 左连接: "表1 left [outer] join 表2 on 表1.列 = 表2.列;"        --用左表匹配右表,保证左表全部显示
+                    3) 右连接: "表1 right [outer] join 表2 on 表1.列 = 表2.列;"       --用右表匹配左表,保证右表全部显示
+                    4) 外连接: "表1 full [outer] join 表2 on 表1.列 = 表2.列;"        --两张表都会显示
+            11.集合筛选
+                要求: 参与集合查询的列数要相同,对应的数据类型要一致;
+                并集(union)、交集（intersect）、求差（except）
+                     1）并集 union
+                        select * from stu where subject = 'computer' union
+                        select * from stu where age > 19;
+                        等效语句: select * from stu where subject = 'computer' or age > 19;
+                     2) 交集 intersect
+                        select * from stu where subject = 'computer' intersect
+                        select * from stu where age > 19;
+                        等效语句: select * from stu where subject = 'computer' and age > 19;
+
+                        扩展: select Sno from stu where Cno_1=1 intersect
+                              select Sno from stu where Cno_2=2;
+                        等效语句: select Sno from stu where Cno_1=1 and Sno in (select Sno from stu where Cno_2=2);
+                     3) 差 except(mysql 不支持except操作)
+                        select * from stu where subject = 'computer' except
+                        select * from stu where age > 19;
+                        等效语句: select * from stu where subject = 'computer' and age <= 19;
+                对集合的排序,只能对查询后的结果进行排序,不能对中间的查询进行排序。
+                    select * from stu where subject = 'computer' union
+                    select * from stu where age > 19
+                    order by id asc;
+
+III 数据库用户、权限管理（DCL语句）
+    一、小结
+        DDL：create/alter/drop
+        DML：update/insert/delete
+        DQL：select/show
+        DCL：grant/invoke
+    二、用户管理
+        通过mysql数据库的user表查看用户及授权: select host,user,password from user;
+        1） 创建：
+            创建指定ip访问: create user 'userName@127.0.0.1' identified by '123456';
+            创建任意ip访问: create user 'userName@%' identified by '123456';          --%表示任意ip
+        2） 删除：
+            drop user '用户名@主机名';    如,drop user 'userName@127.0.0.1';
+        3) 修改密码
+            修改管理员密码:(未登录mysql下进行操作)
+                mysqladmin -uroot -p password 新密码;      如,mysqladmin -uroot -p password 123456;
+            修改普通用户密码:(登录mysql下进行操作)
+                set password for '用户名@主机名' = password('新密码');       如,set password for 'userName@127.0.0.1' = password('abc123');
+
+    三、权限管理
+            权限包括:create、alter、select、insert、update等等。   --所有权限：all privileges；
+            给特定表格授权： 数据库.表格                           --所有数据库的所有表格： *.*
+            '用户名@主机地址'
+            开放指定权限: grant create,alter,insert,select on testDatabase.* to 'userName@%' identified by '123456';
+            开放所有权限: grant all privileges on *.* to 'userName@%' identified by '123456';
+                          grant all on *.* to 'userName@%';
+            撤销权限:     revoke create,inert on testDatabase.* from 'userName_1@%','userName_2@%';
+            查看权限:     show grants for 'userName@127.0.0.1';
+            注意: 权限修改后,需要使用 "flush privileges;" 使权限更新;
+
+            常见操作:
+                ① grant all privileges on *.* to 'root@127.0.0.1' identified by '123456' with grant option;     对本机的root账号开放所有权限
+                ② flush privileges;                                                                             更新权限
+                ③ linux 端防火墙开放端口访问权限: firewall-cmd --zone=public --add-port=3306/tcp                防火墙开放端口
+
+IV 其他
+    查看mysql系统属性值:
+    一、通过“show variables [like '变量名%']”查看
+        show variables;                 --查看所有变量
+        show variables like 'abc%';     --查看指定变量,%为通配符
+        查看编码设置:
+            show variables like 'character_%';
+        查看自增设置:
+            show variables like 'auto_in%';
+    二、通过 “select @@属性名全称” 查看
+        查看变量值(具体值,不支持模糊属性):
+            select @@变量值;       如,select @@autocommit;      --查看自动提交事务
+                                      select @@tx_isolation;    --查看事务隔离等级
+    三、数据格式
+        1）日期：
+            mysql中: year()、month()、day()、hour()、minute()、second()、now()
+                year(now());
+                month('2021-7-15 12:05:33');
+        2) cast函数:  -> cast 数据 as 数据类型
+            cast转换数据类型
+                cast(12.5 as decimal(7,2));                  --12.5 ,最长7位,包括小数和整数部分
+                cast(12.5 as decimal);                       --12 ,不指定小数位数,则返回整数
+                cast('12.5' as char);                        --12.5
+                cast(12 as int);                             --12
+                cast(12.5 as int)                            --error
+            cast提取日期:
+                cast('2021-7-15 12:05:33' as datetime)       --2021-7-15 12:05:33
+                cast('2021-7-15 12:05:33' as year)           --2021
+                cast('2021-7-15 12:05:33' as month)          --7
+                cast('2021-7-15 12:05:33' as day)            --15
+                cast('2021-7-15 12:05:33' as hour)           --12
+                cast('2021-7-15 12:05:33' as minute)         --5
+                cast('2021-7-15 12:05:33' as second)         --33
+        3) 字符串函数
+            CONCAT(str1,str2,...,strn) 	            将str1,str2,...,strn连接为一个完整的字符串
+            INSERT(str,x,y,instr) 	                将字符串str从第x开始，y个字符串长度的子串替换为字符串instr
+            LOWER(str) 	                            将字符串str中的所有字母变成小写
+            UPPER(str) 	                            将字符串str中的所有字母变成大写
+            LEFT(str,x) 	                        返回字符串最左边的x个字符
+            RIGHT(str,x) 	                        返回字符串最右边的x个字符
+            LPAD(str,n,pad) 	                    使用字符串pad对字符串str最左边进行填充，直到长度为n个字符长度
+            RPAD(str,n,pad) 	                    使用字符串pad对字符串str最右边进行填充，直到长度为n个字符长度
+            LTRIM(str) 	                            去掉str左边的空格
+            RTRIM(str) 	                            去掉str右边的空格
+            REPEAT(str,x) 	                        返回字符串str重复x次的结果
+            REPLACE(str,a,b) 	                    使用字符串b替换字符串str中所有出现的字符串a
+            STRCMP(str1,str2) 	                    比较字符串str1和str2
+            TRIM(str) 	                            去掉字符串行头和行尾的空格
+            SUBSTRING(str,x,y) 	                    返回字符串str中从x位置起y个字符串长度的字符串
+
+            reverse(str)                            字符串反转后返回
+            space(n)                                生成n个空格
+            instr(str,substr)                       在str中查找substr第一次出现的序列
+            format(X,D[,locate])                    格式化X,D表示保留的小数位数(四舍五入)         --如,format(123.456,2) → 123.46
+            length(str)                             返回str长度
+
+            //创建空表
+            create table du(val varchar(100));
+            insert into du VALUES(null);
+            select * from du;
+
+            select reverse('abc') from du;                                                -- cba
+            select repeat('abc',5) from du;                                               -- abcabcabcabcabc
+            select replace('abc123def789def','def','_456_') from du;                      -- abc123_456_789_456_
+            select instr('abcdefgabc','b') from du;                                       -- 2
+            select substr('abcdefg',3,4) from du;                                         -- cdef
+            select length('abc') from du;                                                 -- 3
+            select concat(ltrim('  abc 二等分 gjg   '),'_A') from du;                     -- abc 二等分 gjg   _A
+            select concat(rtrim('  abc 二等分 gjg   '),'_A') from du;                     --   abc 二等分 gjg_A
+            select concat(trim('  abc 二等分 gjg   '),'_A') from du;                      -- abc 二等分 gjg_A
+            select format('123456.789123',2) from du;                                     -- 123456.79
+            select insert('abc123def456',3,7,'@#$%^&*()') from du;                        -- ab@#$%^&*()456
+            select lpad("abc",7,'*') from du;                                             -- ****abc
+            select rpad('abc',5,'Q') from du;                                             -- abcQQ
+            select upper('abCDefg') from du;                                              -- ABCDEFG
+            select lower('abCDefg') from du;                                              -- abcdefg
+
+V   JDBC连接数据库
+    1) 要求jvm执行并加载指定类,即加载驱动
+        class.forName("com.mysql.cj.jdbc.Driver");
+    2) 创建连接
+        ①直接连接数据库
+            Connection conn = DriverManager.getConnection(url,userName,password);
+            其中:
+                url 指的是 mysql地址,如:"jdbc:mysql://10.130.212.160:3306"?useUnicode=true&characterEncoding=utf8;
+                                                                        --?useUnicode=true&characterEncoding=utf8 作用是让数据库统一用utf-8处理数据
+                uername 指的是 用户名
+                password 指的是 密码
+        ②通过属性文件创建连接
+            url = "jdbc:mysql://10.130.212.160:3306/mysqlDatabase?characterEncoding=utf8";
+            Properties info = new Properties();
+            info.setProperty("user","root");
+            info.setProperty("password","root");
+            Connection conn = DriverManager.getConnection(url,info);
+        ③Connection接口中的方法:
+            void setAutoCommit(boolean autoCommit)                       --设置自动提交,true表示自动提交;false表示关闭自动提交,相当于开启事务
+            void commit()                                                --提交事务
+            void rollback()                                              --回滚
+    3) 创建连接状态,类似一个平台/浏览器,通过statement向数据库发送sql请求
+        1) 通过Statement发送sql语句(存在sql注入风险)        -> statement作为一个平台
+        Statement statement = conn.createStatement();
+            执行sql语句:
+                ①执行sql语句(不接收结果):
+                    statement.execute("sql语句");
+                ②执行sql语句(接收结果):
+                    ResultSet rs = statement.executeQuery("sql语句");
+                ③执行sql语句(返回受影响行数)
+                    int row = statement.executeUpdate("sql语句");
+        2) 通过PreparedStatement发送sql语句(由服务器编译后执行,通过?占位,不存在sql注入风险)   -> connection作为一个平台,preparedStatement负责提供一个模板
+        PreparedStatement psmt = conn.prepareStatement(sql语句);
+            执行sql语句:
+                ①查询:
+                    //设置查询样式
+                    PreparedStatement psmtQuery = conn.prepareStatement("select * from stu where subject=? and scores>? and grade=?;");
+                    //传递查询参数
+                    psmtQuery.setString(1,'Math');          --指定要查询的第一个"?"的值 (subject)
+                    psmtQuery.setInt(2,90);                 --指定要查询的第二个"?"的值 (scores)
+                    psmtQuery.setInt(3,2);                  --指定要查询的第三个"?"的值 (grade)
+                    //执行查询并用ResultSet接收查询结果
+                    ResultSet rs = psmtQuery.executeQuery();
+
+                ②插入行:
+                    PreparedStatement psmtInsert = conn.prepareStatement("insert into stu(?,?,?) values(?,?,?);");
+                    //设置列
+                    psmtInsert.setString(1,"id");
+                    psmtInsert.setString(2,"name");
+                    psmtInsert.setString(3,"age");
+                    //插入行
+                    psmtInsert.setInt(4,1);
+                    psmtInsert.setString("zhangsan");
+                    psmtInsert.setInt(16);
+                    int row = psmtInsert.executeUpdate();
+
+                ③修改:
+                    PreparedStatement psmtUpdate = conn.prepareStatement("update stu set name=?,birthday=?, where id=?");
+                    psmtUpdate.setString(1,"lisi");
+                    psmtUpdate.setDate(2,Date.valueOf("1995-5-6"));
+                    psmtUpdate.setInt(3,6);
+                    int row = psmtUpdate.executeUpdate();
+                    
+
+                    

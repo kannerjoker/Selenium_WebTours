@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>innerHTML</title>
+</head>
+<body>
+    <div id="d">div</div>
+    <script>
+        var div = document.getElementById("d");
+        window.alert(div.innerHTML);
+        // div.innerHTML = "<input type=\"button\" value=\"按钮\">";
+        div.innerHTML += "<input type='date'>";
+    </script>
+</body>
+</html>

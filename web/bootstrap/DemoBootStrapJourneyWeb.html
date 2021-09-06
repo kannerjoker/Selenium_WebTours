@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="bootstrap-3.4.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet/less" href="bootstrap-3.4.1-dist/less/JourneyWeb.less">
+    <title>旅游网站</title>
+    <style>
+        #top_banner{
+            width: 100%;
+        }
+        /*导航条,每个分组后添加空格,来控制排版*/
+        @media screen and (min-width:1335px){
+            #cp_1>ul>li>a::after{
+                content: "";
+                margin-left: 50px;
+            }
+        }
+        @media screen and (min-width:1580px){
+            #cp_1>ul>li>a::after{
+                content: "";
+                margin-left: 75px;
+            }
+        }
+
+        .row2{
+            width: 100%;
+        }
+        .row2>div>img{
+            width: 100%;
+        }
+        img[src^="../BomAndDom/img"]{
+            width: 100%;
+        }
+        .row6 img{
+            width: 100%;
+        }
+        .row8>div:nth-child(2) img{
+            width: 100%;
+        }
+        .row8>div:nth-child(1) img{
+            width: 105%;
+        }
+        .row9{
+            padding-bottom: 1em;
+        }
+        .row9 img{
+            float: left;
+            padding-top: 0.5em;
+        }
+        .row9 p{
+            float:left;
+            color:white;
+            font-size: 1.5em;
+            margin-left: 0.5em;
+        }
+        .row9 span{
+            float: left;
+            color: #606062;
+            font-size: 0.75em;
+        }
+
+        .col-xs-12{
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- row1 -->
+        <div class="col-xs-12 row1">
+            <img id="top_banner" src="../case_journeyWeb/img/top_banner.jpg" alt="">
+        </div>
+        <!-- row2 搜索栏 -->
+        <div class="col-xs-12 row2">
+            <div class="col-xs-4 col-sm-2" style="float:left">
+                <img src="../case_journeyWeb/img/logo.jpg">
+            </div>
+            <div class="col-xs-4 col-sm-6 col-sm-push-1" style="float:left">
+                <form class="form-group ">
+                    <div class="input-group">
+                        <input type="text" class="form-control input-group-addon" placeholder="请输入路线名称">
+                        <span type="submit" class="btn btn-default input-group-addon">搜索</span>
+                    </div>
+                </form>
+            </div>
+            <div class="col-xs-4 col-sm-2" style="float:right">
+                <img src="../case_journeyWeb/img/hotel_tel.png">
+            </div>
+        </div>
+        <!-- row3 导航条 -->
+        <div class="col-xs-12 row3">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#cp_1">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand">首页</a>
+                    </div>
+
+                    <div id="cp_1" class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a data-toggle="dropdown">门票<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a>&yen;799</a></li>
+                                    <li><a>&yen;752</a></li>
+                                    <li><a>&yen;688</a></li>
+                                </ul>
+                            </li>
+                            <li><a>酒店</a></li>
+                            <li><a>香港车票</a></li>
+                            <li><a>出境地</a></li>
+                            <li><a>国内游</a></li>
+                            <li><a>港澳游</a></li>
+                            <li><a>抱团定制</a></li>
+                            <li class="dropdown"><a data-toggle="dropdown">全球自由行
+                                <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a>中国</a></li>
+                                    <li><a>美国</a></li>
+                                    <li><a>印度</a></li>
+                                </ul>
+                            </li>
+                            <li><a>收藏排行榜</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <!-- row4 轮播图 -->
+        <div class="col-xs-12 row4">
+            <div class="carousel slide" id="crs" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#crs" data-slide-to="0" class="active"></li>
+                    <li data-target="#crs" data-slide-to="1"></li>
+                    <li data-target="#crs" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <img src="../BomAndDom/img/banner_3.jpg" alt="">
+                        <div class="carousel-caption"></div>
+                    </div>
+                    <div class="item">
+                        <img src="../BomAndDom/img/banner_2.jpg" alt="">
+                        <div class="carousel-caption"></div>
+                    </div>
+                    <div class="item">
+                        <img src="../BomAndDom/img/banner_1.jpg">
+                        <div class="carousel-caption"></div>
+                    </div>
+                </div>
+                <a class="left carousel-control" href="#crs" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="right carousel-control" href="#crs" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid" >
+        <!-- row5 黑马精选 -->
+        <div class="col-xs-12 row5">
+            <img src="../case_journeyWeb/img/icon_5.jpg" alt=""><b>黑马精选</b>
+        </div>
+        <div class="col-xs-12 row6">
+            <div class="col-xs-3">
+                <img src="../case_journeyWeb/img/jiangxuan_1.jpg">
+                <p>
+                    <span class="hidden-xs">上海</span>
+                    直飞三亚
+                    <span class="hidden-xs hidden-sm">5天4晚自由行(春节预售+亲子/蜜月/休闲旅游首选+豪华酒店任选+接送机)</span>
+                </p>
+                <font color="red">$899</font>
+            </div>
+            <div class="col-xs-3">
+                <img src="../case_journeyWeb/img/jiangxuan_1.jpg">
+                <p>
+                    <span class="hidden-xs">上海</span>
+                    直飞三亚
+                    <span class="hidden-xs hidden-sm">5天4晚自由行(春节预售+亲子/蜜月/休闲旅游首选+豪华酒店任选+接送机)</span>
+                </p>
+                <font color="red">$899</font>
+            </div>
+            <div class="col-xs-3">
+                <img src="../case_journeyWeb/img/jiangxuan_1.jpg">
+                <p>
+                    <span class="hidden-xs">上海</span>
+                    直飞三亚
+                    <span class="hidden-xs hidden-sm">5天4晚自由行(春节预售+亲子/蜜月/休闲旅游首选+豪华酒店任选+接送机)</span>
+                </p>
+                <font color="red">$899</font>
+            </div>
+            <div class="col-xs-3">
+                <img src="../case_journeyWeb/img/jiangxuan_1.jpg">
+                <p>
+                    <span class="hidden-xs">上海</span>
+                    直飞三亚
+                    <span class="hidden-xs hidden-sm">5天4晚自由行(春节预售+亲子/蜜月/休闲旅游首选+豪华酒店任选+接送机)</span>
+                </p>
+                <font color="red">$899</font>
+            </div>
+        </div>
+        <!-- row7 国内精选-->
+        <div class="col-xs-12 row7">
+            <img src="../case_journeyWeb/img/icon_6.jpg"><b>国内精选</b>
+        </div>
+        <div class="col-xs-12 row8">
+            <div class="col-xs-4 col-sm-3">
+                <img src="../case_journeyWeb/img/guonei_1.jpg" alt="">
+            </div>
+            <div class="col-xs-8 col-sm-9">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <img src="../case_journeyWeb/img/jiangxuan_2.jpg" alt="">
+                        <p>
+                            <span class="hidden-xs">上海</span>直飞三亚
+                            <span class="hidden-xs hidden-sm">5天4晚自由行(春节预售+亲子/蜜月/休闲旅游首选+豪华酒店任选+接送机)</span>
+                        </p>
+                        <font color="red">&yen;699</font>
+                    </div>
+                    <div class="col-xs-4">
+                        <img src="../case_journeyWeb/img/jiangxuan_2.jpg" alt="">
+                        <p>
+                            <span class="hidden-xs">上海</span>直飞三亚
+                            <span class="hidden-xs hidden-sm">5天4晚自由行(春节预售+亲子/蜜月/休闲旅游首选+豪华酒店任选+接送机)</span>
+                        </p>
+                        <font color="red">&yen;699</font>
+                    </div>
+                    <div class="col-xs-4">
+                        <img src="../case_journeyWeb/img/jiangxuan_2.jpg" alt="">
+                        <p>
+                            <span class="hidden-xs">上海</span>直飞三亚
+                            <span class="hidden-xs hidden-sm">5天4晚自由行(春节预售+亲子/蜜月/休闲旅游首选+豪华酒店任选+接送机)</span>
+                        </p>
+                        <font color="red">&yen;699</font>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <img src="../case_journeyWeb/img/jiangxuan_2.jpg" alt="">
+                        <p>
+                            <span class="hidden-xs">上海</span>直飞三亚
+                            <span class="hidden-xs hidden-sm">5天4晚自由行(春节预售+亲子/蜜月/休闲旅游首选+豪华酒店任选+接送机)</span>
+                        </p>
+                        <font color="red">&yen;699</font>
+                    </div>
+                    <div class="col-xs-4">
+                        <img src="../case_journeyWeb/img/jiangxuan_2.jpg" alt="">
+                        <p>
+                            <span class="hidden-xs">上海</span>直飞三亚
+                            <span class="hidden-xs hidden-sm">5天4晚自由行(春节预售+亲子/蜜月/休闲旅游首选+豪华酒店任选+接送机)</span>
+                        </p>
+                        <font color="red">&yen;699</font>
+                    </div>
+                    <div class="col-xs-4">
+                        <img src="../case_journeyWeb/img/jiangxuan_2.jpg" alt="">
+                        <p>
+                            <span class="hidden-xs">上海</span>直飞三亚
+                            <span class="hidden-xs hidden-sm">5天4晚自由行(春节预售+亲子/蜜月/休闲旅游首选+豪华酒店任选+接送机)</span>
+                        </p>
+                        <font color="red">&yen;699</font>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <!-- row9 拓展 -->
+        <div class="col-xs-12 row9" style="background: #3D3D3F">
+            <div class="col-xs-3">
+                <div class="col-xs-2"></div>
+                <div class="col-xs-10">
+                    <img src="../case_journeyWeb/img/icon_1.jpg">
+                    <p class="hidden-xs">
+                        产品齐全<br>
+                        <span>产品全自主选,随心买</span>
+                    </p>
+                </div>
+
+
+
+            </div>
+            <div class="col-xs-3">
+                <img src="../case_journeyWeb/img/icon_2.jpg">
+            </div>
+            <div class="col-xs-3">
+                <img src="../case_journeyWeb/img/icon_3.jpg">
+            </div>
+            <div class="col-xs-3">
+                <img src="../case_journeyWeb/img/icon_4.jpg">
+            </div>
+        </div>
+        <div class="col-xs-12"></div>
+    </div>
+
+    <script src="bootstrap-3.4.1-dist/jQuery/jquery-3.2.1.min.js"></script>
+    <script src="bootstrap-3.4.1-dist/js/bootstrap.min.js"></script>
+    <script src="bootstrap-3.4.1-dist/js/less.min.js"></script>
+</body>
+</html>
